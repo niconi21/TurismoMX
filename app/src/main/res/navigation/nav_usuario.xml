@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_usuario"
+    app:startDestination="@id/menu_inicio_posts">
+    <fragment
+        android:id="@+id/menu_inicio_mapa"
+        android:name="com.niconi21.turismoargentina.pages.usuario.MapaFragment"
+        android:label="fragment_mapa"
+        tools:layout="@layout/fragment_mapa" />
+    <fragment
+        android:id="@+id/menu_inicio_misPosts"
+        android:name="com.niconi21.turismoargentina.pages.usuario.misPostsFragment"
+        android:label="fragment_mis_posts"
+        tools:layout="@layout/fragment_mis_posts" />
+
+    <fragment
+        android:id="@+id/menu_inicio_subirPost"
+        android:name="com.niconi21.turismoargentina.pages.usuario.SubirPostFragment"
+        android:label="fragment_subir_post"
+        tools:layout="@layout/fragment_subir_post" />
+    <fragment
+        android:id="@+id/menu_inicio_posts"
+        android:name="com.niconi21.turismoargentina.pages.usuario.PostsFragment"
+        android:label="fragment_posts"
+        tools:layout="@layout/fragment_posts" />
+    <fragment
+        android:id="@+id/menu_inicio_perfil"
+        android:name="com.niconi21.turismoargentina.pages.usuario.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/menu_inicio_favoritos"
+        android:name="com.niconi21.turismoargentina.pages.usuario.FavoritosFragment"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+</navigation>

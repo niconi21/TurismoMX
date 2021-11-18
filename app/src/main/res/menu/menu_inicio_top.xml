@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_inicio_buscar"
+        android:contentDescription="@string/menu_buscar"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/menu_buscar"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_inicio_favoritos"
+        android:contentDescription="asdjiosjjdsaodsajdsoaij"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/menu_favoritos"
+        app:showAsAction="ifRoom" />
+</menu>
