@@ -27,9 +27,13 @@
     <string name="menu_subirPost">Subir post</string>
     <string name="menu_posts">Publicaciónes</string>
     <string name="menu_perfil">Perfil</string>
-
     <string name="menu_buscar">Buscar</string>
     <string name="menu_favoritos">Favoritos</string>
+
+    <!--  Perfil fragment  -->
+    <string name="infoUsuario">Información del usuario</string>
+    <string name="actualizarDatos">Actualizar datos</string>
+    <string name="actualizarContraseña">Actualizar contraseña</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
