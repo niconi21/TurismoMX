@@ -3,11 +3,14 @@ package com.niconi21.turismoargentina.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.models.Publicacion;
 
@@ -32,6 +35,7 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
     @Override
     public void onBindViewHolder(@NonNull PublicacionAdapter.ViewHoldersDatos holder, int position) {
         holder.asiganrDatos(publicaciones.get(position));
+
     }
 
     @Override
@@ -42,15 +46,25 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
     public class ViewHoldersDatos extends RecyclerView.ViewHolder {
 
         public TextView titulo;
+        public ImageView imagen;
 
         public ViewHoldersDatos(@NonNull View itemView) {
 
             super(itemView);
             this.titulo = (TextView) itemView.findViewById(R.id.tituloPost);
+            this.imagen = (ImageView) itemView.findViewById(R.id.imgPostItem);
+            this.imagen.setOnLongClickListener(v -> {
+                Toast.makeText(itemView.getContext(), "Imagen", Toast.LENGTH_LONG).show();
+                Glide.with(itemView.getContext()).load(R.drawable.common_google_signin_btn_icon_dark).into(this.imagen);
+
+                return true;
+            });
         }
 
         public void asiganrDatos(Publicacion publicacion) {
             this.titulo.setText(publicacion.getTitulo());
+
+
         }
     }
 }

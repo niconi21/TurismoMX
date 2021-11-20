@@ -43,4 +43,5 @@
         android:name="com.niconi21.turismoargentina.UsuarioActivity"
         android:label="activity_usuario"
         tools:layout="@layout/activity_usuario" />
+
 </navigation>

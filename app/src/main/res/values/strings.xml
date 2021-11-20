@@ -34,6 +34,13 @@
     <string name="infoUsuario">Información del usuario</string>
     <string name="actualizarDatos">Actualizar datos</string>
     <string name="actualizarContraseña">Actualizar contraseña</string>
+
+    <!--  Datos post activity  -->
+    <string name="descripcion">Descripción</string>
+    <string name="ubicacion">Ubicación</string>
+    <string name="etiquetas">Etiquetas</string>
+    <string name="subirPost">Subir publicación</string>
+    <string name="cancelar">Cancelar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -92,6 +92,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/imgPostItem"
                     android:layout_width="match_parent"
                     android:layout_height="194dp"
                     android:contentDescription="Imagen de prueba"

@@ -16,11 +16,6 @@
         tools:layout="@layout/fragment_mis_posts" />
 
     <fragment
-        android:id="@+id/menu_inicio_subirPost"
-        android:name="com.niconi21.turismoargentina.pages.usuario.SubirPostFragment"
-        android:label="fragment_subir_post"
-        tools:layout="@layout/fragment_subir_post" />
-    <fragment
         android:id="@+id/menu_inicio_posts"
         android:name="com.niconi21.turismoargentina.pages.usuario.PostsFragment"
         android:label="fragment_posts"
