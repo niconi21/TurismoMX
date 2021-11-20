@@ -10,6 +10,7 @@ import android.os.Bundle;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.niconi21.turismoargentina.tools.Navegacion;
+import com.niconi21.turismoargentina.tools.Permisos;
 
 public class UsuarioActivity extends AppCompatActivity {
     private NavHostFragment _navHostFragment;
@@ -18,6 +19,8 @@ public class UsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
+        Permisos.permisoCamaraStorage(getApplicationContext(), this);
+
         this._navegacion();
     }
 

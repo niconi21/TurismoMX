@@ -40,7 +40,7 @@ public class PostsFragment extends Fragment {
 
     private void _llenarListaPosts() {
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Publicacion publicacion = new Publicacion();
             publicacion.setTitulo("Posts Titulo " + i);
             this._publicaciones.add(publicacion);

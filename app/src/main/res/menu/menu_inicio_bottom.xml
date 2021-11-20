@@ -8,22 +8,16 @@
         android:title="@string/menu_mapa"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_inicio_misPosts"
-        android:contentDescription="@string/menu_misPosts"
-        android:icon="@drawable/ic_baseline_history_24"
-        android:title="@string/menu_misPosts"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/menu_inicio_subirPost"
-        android:contentDescription="@string/menu_subirPost"
-        android:icon="@drawable/ic_baseline_add_circle_24"
-        android:title="@string/menu_subirPost"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/menu_inicio_posts"
         android:contentDescription="@string/menu_posts"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/menu_posts"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_inicio_misPosts"
+        android:contentDescription="@string/menu_misPosts"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/menu_misPosts"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_inicio_perfil"
