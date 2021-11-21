@@ -1,5 +1,13 @@
 package com.niconi21.turismoargentina.adapters;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +22,10 @@ import com.bumptech.glide.Glide;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.models.Publicacion;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.ViewHoldersDatos> {
 
@@ -54,9 +65,11 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
             this.titulo = (TextView) itemView.findViewById(R.id.tituloPost);
             this.imagen = (ImageView) itemView.findViewById(R.id.imgPostItem);
             this.imagen.setOnLongClickListener(v -> {
-                Toast.makeText(itemView.getContext(), "Imagen", Toast.LENGTH_LONG).show();
-                Glide.with(itemView.getContext()).load(R.drawable.common_google_signin_btn_icon_dark).into(this.imagen);
+                Bitmap finalBitmap = ((BitmapDrawable)this.imagen.getDrawable()).getBitmap();
+                Glide.with(itemView.getContext()).load("https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/06/09/2592367.jpg").into(this.imagen);
 
+                MediaStore.Images.Media.insertImage(itemView.getContext().getContentResolver(),  finalBitmap, "imagenPrueba.png" , "yourDescription");
+                Toast.makeText(itemView.getContext(), R.string.imagenSave, Toast.LENGTH_LONG).show();
                 return true;
             });
         }
