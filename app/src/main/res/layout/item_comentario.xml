@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nicolas Moreno Durán"
+            android:textSize="@dimen/size_data" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - Autor"
+            android:textSize="@dimen/size_data" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/comentarioItemC"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:justificationMode="inter_word"
+        android:text="Comentario del usuarioComentario del usuarioComentario del usuarioComentario del usuarioComentario del usuario"
+        android:textSize="@dimen/size_description" />
+</LinearLayout>

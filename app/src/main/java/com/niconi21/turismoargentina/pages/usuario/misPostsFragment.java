@@ -35,11 +35,14 @@ public class misPostsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaMisPosts);
+        this._establecerItems(view);
         this._llenarListaPosts();
     }
 
-    private void _llenarListaPosts() {
+    private void _establecerItems(View view) {
+        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaMisPosts);
+    }
+        private void _llenarListaPosts() {
         for (int i = 0; i < 100; i++) {
             Publicacion publicacion = new Publicacion();
             publicacion.setTitulo("Mi post Titulo " + i);

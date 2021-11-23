@@ -19,6 +19,7 @@ public class Implementacion {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(context));
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(adapter);
     }

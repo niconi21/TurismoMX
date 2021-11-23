@@ -34,9 +34,12 @@
     <string name="infoUsuario">Información del usuario</string>
     <string name="actualizarDatos">Actualizar datos</string>
     <string name="actualizarContraseña">Actualizar contraseña</string>
+    <string name="cerrarSesion">Cerrar sesión</string>
+    <string name="imgPerfil">Imágen de perfil</string>
 
     <!--   itemPublicación   -->
     <string name="imagenSave">Imagen guardada en galería</string>
+
     <!--  Datos post activity  -->
     <string name="descripcion">Descripción</string>
     <string name="ubicacion">Ubicación</string>
@@ -44,7 +47,5 @@
     <string name="subirPost">Subir publicación</string>
     <string name="cancelar">Cancelar</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

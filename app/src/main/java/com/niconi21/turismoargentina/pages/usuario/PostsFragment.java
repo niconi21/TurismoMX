@@ -33,20 +33,21 @@ public class PostsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaPosts);
+        this._establecerItems(view);
         this._llenarListaPosts();
 
     }
-
+    private void _establecerItems(View view) {
+        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaPosts);
+    }
     private void _llenarListaPosts() {
-
         for (int i = 0; i < 10; i++) {
             Publicacion publicacion = new Publicacion();
             publicacion.setTitulo("Posts Titulo " + i);
             this._publicaciones.add(publicacion);
         }
-
         PublicacionAdapter publicacionAdapter = new PublicacionAdapter(this._publicaciones);
         Implementacion.llenarListaRecycleView(this.getContext(), this._recyclerView, publicacionAdapter ,this._publicaciones);
+
     }
 }

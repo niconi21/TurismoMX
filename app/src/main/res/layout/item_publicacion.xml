@@ -6,7 +6,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
+        android:id="@+id/cardItemPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -18,72 +18,78 @@
             android:orientation="vertical">
 
             <!--Header-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:paddingTop="20dp"
                 android:paddingRight="20dp"
                 android:paddingBottom="10dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:contentDescription="Descripción xd"
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:contentDescription="Descripción xd"
-
-                            android:src="@drawable/ic_baseline_history_24" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tituloPost"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="Titulo"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="18 de noviembre del 2021"
-                            android:textSize="16sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="right"
-                        android:orientation="horizontal">
-
-                        <ImageButton
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="Descripción xd"
-                            android:src="@drawable/ic_baseline_favorite_24" />
-
-                    </LinearLayout>
-
-
+                        android:src="@drawable/ic_baseline_history_24" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tituloPost"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Titulo"
+                        android:textSize="@dimen/size_titles"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="18 de noviembre del 2021"
+                        android:textSize="@dimen/size_subStitle" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="Descripción xd"
+                        android:src="@drawable/ic_baseline_edit_24" />
+
+                    <ImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="Descripción xd"
+                        android:src="@drawable/ic_baseline_delete_forever_24" />
+
+                    <ImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="Descripción xd"
+                        android:src="@drawable/ic_baseline_favorite_24" />
+                </LinearLayout>
 
             </LinearLayout>
             <!--Imagen-->
@@ -111,27 +117,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"
-                    android:text="Descripción de la publicación Descripción de la publicación Descripción de la publicación Descripción de la publicación" />
+                    android:text="Descripción de la publicación Descripción de la publicación Descripción de la publicación Descripción de la publicación"
+                    android:textSize="@dimen/size_description" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Subido por Nicolas Moreno Duran"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
+                    android:layout_marginTop="10dp"
+                    android:text="Subido por Nicolas Moreno Duran"
+                    android:textSize="@dimen/size_data"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>

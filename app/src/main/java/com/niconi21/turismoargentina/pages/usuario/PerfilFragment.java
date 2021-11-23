@@ -1,6 +1,5 @@
 package com.niconi21.turismoargentina.pages.usuario;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,9 +17,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.tools.Mensajes;
 
-import java.util.ArrayList;
-
 public class PerfilFragment extends Fragment {
+    private Button _btnCambiarClave;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,35 +30,32 @@ public class PerfilFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button btnCambiarClave = view.findViewById(R.id.actualizarClavePerfil);
-        btnCambiarClave.setOnClickListener(v -> {
-            this.cambiarClave(v);
+        this._establecerItems(view);
+        this.actualizarClave();
+    }
+
+    private void _establecerItems(View view) {
+        this._btnCambiarClave = (Button) view.findViewById(R.id.actualizarClavePerfil);
+    }
+
+    public void actualizarClave() {
+        this._btnCambiarClave.setOnClickListener(v -> {
+            Mensajes.Dialogs(getContext(), "Cambiar contraseña", "Escribe tu contraseña actual y posteriormente la nueva contraseña")
+                    .setNegativeButton(R.string.cancelar, (dialog, which) -> {
+                        Mensajes.MensajeSnackBar(v, "Contraseña no actualizada", Snackbar
+                                .LENGTH_LONG);
+                    })
+                    .setPositiveButton(R.string.actualizarContraseña, (dialog, which) -> {
+                        this._actualizarClave();
+                    })
+                    .create()
+                    .show();
         });
     }
 
-    public void cambiarClave(View view) {
-        MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(getContext());
-        dialogBuilder.setTitle("Cambiar contraseña");
-        dialogBuilder.setMessage("Escribe tu contraseña actual y posteriormente la nueva contraseña");
-
-        dialogBuilder.setPositiveButton("Cambiar contraseña", (dialog, which) -> {
-            Toast.makeText(getContext(), "Contraseña actualizada", Toast.LENGTH_LONG).show();
-        });
-        dialogBuilder.setNegativeButton("Cancelar", (dialog, which) -> {
-            Toast.makeText(getContext(), "Contraseña no actualizada", Toast.LENGTH_LONG).show();
-        });
-
-        dialogBuilder.create();
-        dialogBuilder.show();
-//        // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//
-//// 2. Chain together various setter methods to set the dialog characteristics
-//        builder.setMessage("Mensaje")
-//                .setTitle("Titulo");
-//
-//// 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
+    private void _actualizarClave(){
+        Mensajes.MensajeSnackBar(this.getView(), "Contraseña actualizada", Snackbar.LENGTH_LONG);
     }
+
+
 }

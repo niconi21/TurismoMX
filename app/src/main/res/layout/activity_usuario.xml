@@ -56,6 +56,6 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="Descripcion"
-        android:onClick="dispatchTakePictureIntent"
+        android:onClick="capturarFoto"
         app:srcCompat="@drawable/ic_baseline_add_24" />
 </RelativeLayout>

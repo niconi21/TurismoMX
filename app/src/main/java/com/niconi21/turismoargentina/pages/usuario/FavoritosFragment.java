@@ -33,8 +33,13 @@ public class FavoritosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaPostFavoritos);
+        this._establecerItems(view);
         this._llenarListaPosts();
+    }
+
+    private void _establecerItems(View view){
+        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaPostFavoritos);
+
     }
 
     private void _llenarListaPosts() {
