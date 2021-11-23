@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.snackbar.Snackbar;
-import com.niconi21.turismoargentina.tools.Mensajes;
 
 public class BuscarActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
