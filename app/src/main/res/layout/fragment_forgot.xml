@@ -62,7 +62,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tfUsuarioLogin"
+                        android:id="@+id/tfCorreoForgot"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                         android:id="@+id/btnReestablecerForgot"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/registrarse"
+                        android:text="@string/reestablecerClave"
                         android:textColor="@color/white" />
 
                     <TextView

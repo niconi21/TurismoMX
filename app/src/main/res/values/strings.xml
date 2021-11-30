@@ -52,4 +52,7 @@
     <!--  BottomSheetsImagen  -->
     <string name="compartir">Compartir</string>
     <string name="descargarImagen">Descargar imagen</string>
+
+<!--  API  -->
+    <string name="URL_API">https://turismomx-api.herokuapp.com/api/v1</string>
 </resources>

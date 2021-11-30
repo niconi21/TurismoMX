@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.niconi21.turismoargentina.R;
+import com.niconi21.turismoargentina.services.AuthServices;
 import com.niconi21.turismoargentina.tools.Mensajes;
 import com.niconi21.turismoargentina.tools.Navegacion;
 
@@ -23,6 +25,8 @@ import com.niconi21.turismoargentina.tools.Navegacion;
  * create an instance of this fragment.
  */
 public class ForgotFragment extends Fragment {
+    private Button _btnReestablecer;
+    private TextInputLayout _correo;
 
     public ForgotFragment() {
         // Required empty public constructor
@@ -40,13 +44,29 @@ public class ForgotFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this._navegacionFragment(view);
-        Button btnReestablecer = view.findViewById(R.id.btnReestablecerForgot);
-        Mensajes.MensajeSnackBar(view,btnReestablecer, "Contraseña reestablecida", Snackbar.LENGTH_LONG);
+        this._establecerComponentes(view);
+        this._recuperarClave(view);
+    }
+
+    private void _establecerComponentes(View view) {
+
+        this._btnReestablecer = view.findViewById(R.id.btnReestablecerForgot);
+        this._correo = view.findViewById(R.id.tfCorreoForgot);
     }
 
     private void _navegacionFragment(View view) {
         NavController navigation = Navigation.findNavController(view);
         Button btnLogin = view.findViewById(R.id.btnLoginForgot);
         Navegacion.setNavegacion(navigation, btnLogin, R.id.loginFragment);
+    }
+
+    private void _recuperarClave(View view) {
+        this._btnReestablecer.setOnClickListener(v -> {
+            String correo = this._correo.getEditText().getText().toString();
+            AuthServices auth = new AuthServices(this.getContext(), view);
+            auth.recuperarClave(correo);
+
+        });
+
     }
 }

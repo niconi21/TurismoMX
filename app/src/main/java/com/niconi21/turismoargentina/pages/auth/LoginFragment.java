@@ -12,15 +12,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.niconi21.turismoargentina.R;
+import com.niconi21.turismoargentina.services.AuthServices;
+import com.niconi21.turismoargentina.services.Peticiones;
 import com.niconi21.turismoargentina.tools.Mensajes;
 import com.niconi21.turismoargentina.tools.Navegacion;
+
+import org.json.JSONException;
+
+import java.util.HashMap;
 
 
 public class LoginFragment extends Fragment {
 
+    private TextInputLayout _correo;
+    private TextInputLayout _clave;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -37,6 +49,7 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this._navegacionFragment(view);
+        this._declararElementos(view);
         this._login(view);
 
     }
@@ -51,11 +64,25 @@ public class LoginFragment extends Fragment {
         Navegacion.setNavegacion(navigation, btnForgot, R.id.forgotFragment);
     }
 
+    private void _declararElementos(View view){
+        this._correo = view.findViewById(R.id.tfUsuarioLogin);
+        this._clave = view.findViewById(R.id.tfClaveLogin);
+    }
+
     private void _login(View view) {
         NavController navigation = Navigation.findNavController(view);
         Button btnLogin = view.findViewById(R.id.btnIniciarSesionLogin);
-        Mensajes.MensajeSnackBar(view, btnLogin, "Login exitoso", Snackbar.LENGTH_LONG);
-        Navegacion.setNavegacion(navigation,btnLogin, R.id.usuarioActivity);
+        btnLogin.setOnClickListener(v -> {
+            AuthServices auth = new AuthServices(this.getContext(), view);
+            String correo = this._correo.getEditText().getText().toString();
+            String clave = this._clave.getEditText().getText().toString();
+            System.out.println("AUTH-------");
+            System.out.println(correo);
+            System.out.println(clave);
+            auth.Login(correo, clave, navigation);
+//            Mensajes.MensajeSnackBar(view, "Login exitoso", Snackbar.LENGTH_LONG);
+//            Navegacion.setNavegacion(navigation, R.id.usuarioActivity);
+        });
     }
 
 }

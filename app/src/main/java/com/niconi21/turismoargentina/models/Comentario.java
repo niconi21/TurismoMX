@@ -1,8 +1,12 @@
 package com.niconi21.turismoargentina.models;
 
+import java.util.Date;
+
 public class Comentario {
 
     private String comentario;
+    private Usuario usuario;
+    private Date fecha;
 
     public String getComentario() {
         return comentario;

@@ -24,6 +24,9 @@ public class Mensajes {
             }
         });
     }
+    public static void MensajeToast(Context context, String msg, int duration) {
+        Toast.makeText(context, msg, duration).show();
+    }
 
     public static MaterialAlertDialogBuilder Dialogs(Context context, String title, String mensaje) {
         MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(context);

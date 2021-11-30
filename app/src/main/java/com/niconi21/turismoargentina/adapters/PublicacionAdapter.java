@@ -88,7 +88,7 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
 
                 BottomSheetDialogFragment bsi = new BottomSheetsImagen();
                 FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
-                this._publicacion.imagen="https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/06/09/2592367.jpg";
+                this._publicacion.setImagen("https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/06/09/2592367.jpg");
                 ((BottomSheetsImagen) bsi).publicacion = this._publicacion;
                 bsi.show(((FragmentActivity) itemView.getContext()).getSupportFragmentManager(), "etiqueta");
 
@@ -105,7 +105,7 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
             switch (v.getId()) {
                 case R.id.cardItemPost:
                     Intent intent = new Intent(this.context, PostDetalleActivity.class);
-                    intent.putExtra("titulo", this._publicacion.titulo);
+                    intent.putExtra("titulo", this._publicacion.getTitulo());
                     ((Activity) context).startActivityForResult(intent, 1);
                     break;
             }

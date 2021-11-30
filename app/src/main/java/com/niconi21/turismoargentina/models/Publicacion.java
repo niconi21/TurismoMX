@@ -2,15 +2,52 @@ package com.niconi21.turismoargentina.models;
 
 import com.niconi21.turismoargentina.interfaces.IPublicacion;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Publicacion {
-    public String id;
-    public String imagen;
-    public String titulo;
-    public String descripcion;
-    public String ubicacion;
+
+    private String id = "";
+    private String imagen = "";
+    private String titulo = "";
+    private String descripcion = "";
+    private Coordenada ubicacion = new Coordenada();
+    private Usuario usuario = new Usuario();
+    private ArrayList<String> etiquetas = new ArrayList<String>();
+    private ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
+    private Date fecha = new Date();
 
     public Publicacion() {
+    }
 
+    public Publicacion jsonObjectToPublicacion(JSONObject publicacionJson) {
+        Publicacion publicacion = new Publicacion();
+        try {
+            publicacion.setTitulo(publicacionJson.getString("titulo"));
+            publicacion.setDescripcion(publicacionJson.getString("descripcion"));
+            publicacion.setUbicacion(this.getUbicacion().jsonObjectToCoordenada(publicacionJson.getJSONObject("ubicacion")));
+            publicacion.setUsuario((new Usuario()).jsonObjectToUsuario(publicacionJson.getJSONObject("usuario")));
+            publicacion.setImagen(publicacionJson.getString("imagen"));
+            publicacion.setEtiquetas(this.jsonArrayToEtiquetas(publicacionJson.getJSONArray("etiquetas")));
+            publicacion.setComentarios(this.jsonArrayToComentario(publicacionJson.getJSONArray("comentarios")));
+            publicacion.setFecha(((Date) publicacionJson.get("fecha")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            return publicacion;
+        }
+    }
+
+    private ArrayList<String> jsonArrayToEtiquetas(JSONArray etiquetasArray) {
+        return null;
+    }
+
+    private ArrayList<Comentario> jsonArrayToComentario(JSONArray comentariosArray) {
+        return null;
     }
 
     public String getId() {
@@ -45,23 +82,45 @@ public class Publicacion {
         this.descripcion = descripcion;
     }
 
-    public String getUbicacion() {
+    public Coordenada getUbicacion() {
         return ubicacion;
     }
 
-    public void setUbicacion(String ubicacion) {
+    public void setUbicacion(Coordenada ubicacion) {
         this.ubicacion = ubicacion;
     }
 
-    public String getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public String usuario;
+    public ArrayList<String> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(ArrayList<String> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
+
+    public ArrayList<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(ArrayList<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
 
 }

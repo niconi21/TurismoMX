@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.adapters.PublicacionAdapter;
 import com.niconi21.turismoargentina.models.Publicacion;
+import com.niconi21.turismoargentina.models.Usuario;
 import com.niconi21.turismoargentina.tools.Implementacion;
 
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class FavoritosFragment extends Fragment {
     }
 
     private void _llenarListaPosts() {
+
+
 
         for (int i = 0; i < 100; i++) {
             Publicacion publicacion = new Publicacion();

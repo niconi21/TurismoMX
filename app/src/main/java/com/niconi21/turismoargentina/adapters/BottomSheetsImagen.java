@@ -72,9 +72,9 @@ public class BottomSheetsImagen extends BottomSheetDialogFragment {
 
         this.compartir.setOnClickListener(v -> {
             String texto = "Te invito a ver mi publicación\n";
-            texto += this.publicacion.titulo+"\n";
-            texto += this.publicacion.descripcion+"\n";
-            texto += this.publicacion.imagen;
+            texto += this.publicacion.getTitulo()+"\n";
+            texto += this.publicacion.getDescripcion()+"\n";
+            texto += this.publicacion.getImagen();
 
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
@@ -87,9 +87,9 @@ public class BottomSheetsImagen extends BottomSheetDialogFragment {
         });
 
         this.descargar.setOnClickListener(v -> {
-            Bitmap imagen = getBitmapFromURL(this.publicacion.imagen);
+            Bitmap imagen = getBitmapFromURL(this.publicacion.getImagen());
             if(imagen!=null) {//Glide.with(v.getContext()).load(this.imagen).into(iv);
-                MediaStore.Images.Media.insertImage(v.getContext().getContentResolver(), imagen, this.publicacion.titulo, this.publicacion.descripcion);
+                MediaStore.Images.Media.insertImage(v.getContext().getContentResolver(), imagen, this.publicacion.getTitulo(), this.publicacion.getDescripcion());
                 Toast.makeText(v.getContext(), R.string.imagenSave, Toast.LENGTH_LONG).show();
             }else{
                 Toast.makeText(v.getContext(), R.string.imagenDontSave, Toast.LENGTH_LONG).show();
