@@ -7,7 +7,7 @@
     <string name="iniciarSesion">Iniciar sesión</string>
     <string name="registrarse">Registrarse</string>
     <string name="recuperarClave">Recuperar contraseña</string>
-    <string name="clickAqui">¡Haz click aquí!</string>
+    <string name="reestablecerClave">Reestablecer</string>
     <string name="recordarClave">¿Recordar contraseña?</string>
     <!--    Regsitro    -->
     <string name="registro">Registro</string>
@@ -39,6 +39,7 @@
 
     <!--   itemPublicación   -->
     <string name="imagenSave">Imagen guardada en galería</string>
+    <string name="imagenDontSave">No se pudo dscargar la imagen</string>
 
     <!--  Datos post activity  -->
     <string name="descripcion">Descripción</string>
@@ -48,4 +49,7 @@
     <string name="cancelar">Cancelar</string>
 
 
+    <!--  BottomSheetsImagen  -->
+    <string name="compartir">Compartir</string>
+    <string name="descargarImagen">Descargar imagen</string>
 </resources>

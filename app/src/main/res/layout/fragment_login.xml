@@ -142,7 +142,7 @@
                         style="?attr/materialButtonOutlinedStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/clickAqui" />
+                        android:text="@string/reestablecerClave" />
                 </LinearLayout>
 
             </LinearLayout>

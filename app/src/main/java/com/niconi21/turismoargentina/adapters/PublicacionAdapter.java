@@ -9,17 +9,25 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.niconi21.turismoargentina.PostDetalleActivity;
 import com.niconi21.turismoargentina.R;
+import com.niconi21.turismoargentina.UsuarioActivity;
 import com.niconi21.turismoargentina.models.Publicacion;
 
 import java.util.ArrayList;
@@ -58,8 +66,8 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
         public ImageView imagen;
         public CardView card;
         public Context context;
-
         private Publicacion _publicacion;
+
         public ViewHoldersPublicacion(@NonNull View itemView) {
             super(itemView);
             this.context = itemView.getContext();
@@ -77,11 +85,13 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
 
         public void descargarImagen(View itemView) {
             this.imagen.setOnLongClickListener(v -> {
-                Bitmap finalBitmap = ((BitmapDrawable) this.imagen.getDrawable()).getBitmap();
-                Glide.with(itemView.getContext()).load("https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/06/09/2592367.jpg").into(this.imagen);
 
-                MediaStore.Images.Media.insertImage(itemView.getContext().getContentResolver(), finalBitmap, "imagenPrueba.png", "yourDescription");
-                Toast.makeText(itemView.getContext(), R.string.imagenSave, Toast.LENGTH_LONG).show();
+                BottomSheetDialogFragment bsi = new BottomSheetsImagen();
+                FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
+                this._publicacion.imagen="https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/06/09/2592367.jpg";
+                ((BottomSheetsImagen) bsi).publicacion = this._publicacion;
+                bsi.show(((FragmentActivity) itemView.getContext()).getSupportFragmentManager(), "etiqueta");
+
                 return true;
             });
         }
@@ -92,11 +102,11 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.cardItemPost:
                     Intent intent = new Intent(this.context, PostDetalleActivity.class);
-                    intent.putExtra("titulo",this._publicacion.titulo);
-                    ((Activity)context).startActivityForResult(intent,1);
+                    intent.putExtra("titulo", this._publicacion.titulo);
+                    ((Activity) context).startActivityForResult(intent, 1);
                     break;
             }
         }

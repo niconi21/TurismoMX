@@ -17,9 +17,7 @@ public class BuscarActivity extends AppCompatActivity {
     }
 
     private void _establecerItems() {
-        this.toolbar = (MaterialToolbar) findViewById(R.id.topAppBarBusqueda);
-        toolbar.setNavigationOnClickListener(v -> {
-            onBackPressed();
-        });
+        this.toolbar = findViewById(R.id.topAppBarBusqueda);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 }
