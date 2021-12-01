@@ -17,7 +17,6 @@ public class ResponseCustom {
             this.message = response.getString("message");
             this.ok = response.getBoolean("ok");
             this.status = response.getInt("status");
-            this.result = this.result.parseResult(response.getJSONObject("result"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

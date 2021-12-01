@@ -23,6 +23,7 @@
     </LinearLayout>
 
     <!--  Datos del post  -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +32,24 @@
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tfComentarioPost"
+            android:id="@+id/tfTituloDatosPost"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/titulo"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_baseline_title_24">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfDescripcionDatosPost"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="100dp"
@@ -55,7 +73,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tfEtiquetaPost"
+                android:id="@+id/tfEtiquetaDatosPost"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,36 +105,11 @@
 
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tagsDatosPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="10dp" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_1"
-                style="@style/Widget.MaterialComponents.Chip.Entry"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="Etiqueta" />
-        </com.google.android.material.chip.ChipGroup>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ubicacion" />
-
-            <TextView
-                android:id="@+id/tvCoordenadasPost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp" />
-        </LinearLayout>
 
     </LinearLayout>
     <!--  Acciónes  -->
@@ -129,7 +122,6 @@
             android:id="@+id/btnSubirPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="regresar"
             android:text="@string/subirPost"
             android:textColor="@color/white" />
 
@@ -138,6 +130,7 @@
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="regresar"
             android:text="@string/cancelar" />
     </LinearLayout>
 </LinearLayout>

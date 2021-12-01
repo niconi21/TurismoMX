@@ -12,21 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.services.AuthServices;
-import com.niconi21.turismoargentina.services.Peticiones;
 import com.niconi21.turismoargentina.tools.Mensajes;
 import com.niconi21.turismoargentina.tools.Navegacion;
-
-import org.json.JSONException;
-
-import java.util.HashMap;
+import com.niconi21.turismoargentina.tools.Validaciones;
 
 
 public class LoginFragment extends Fragment {
@@ -64,24 +57,28 @@ public class LoginFragment extends Fragment {
         Navegacion.setNavegacion(navigation, btnForgot, R.id.forgotFragment);
     }
 
-    private void _declararElementos(View view){
-        this._correo = view.findViewById(R.id.tfUsuarioLogin);
+    private void _declararElementos(View view) {
+        this._correo = view.findViewById(R.id.tfCorreoLogin);
         this._clave = view.findViewById(R.id.tfClaveLogin);
+        Validaciones.textChangedListener(this._correo, getString(R.string.mgsErrorCorreo));
+        Validaciones.textChangedListener(this._clave, getString(R.string.mgsErrorClave));
     }
+
 
     private void _login(View view) {
         NavController navigation = Navigation.findNavController(view);
         Button btnLogin = view.findViewById(R.id.btnIniciarSesionLogin);
         btnLogin.setOnClickListener(v -> {
             AuthServices auth = new AuthServices(this.getContext(), view);
-            String correo = this._correo.getEditText().getText().toString();
-            String clave = this._clave.getEditText().getText().toString();
-            System.out.println("AUTH-------");
-            System.out.println(correo);
-            System.out.println(clave);
-            auth.Login(correo, clave, navigation);
-//            Mensajes.MensajeSnackBar(view, "Login exitoso", Snackbar.LENGTH_LONG);
-//            Navegacion.setNavegacion(navigation, R.id.usuarioActivity);
+            Boolean isValidEmail = Validaciones.isValid(this._correo, getString(R.string.mgsErrorCorreo));
+            Boolean isValidPassword = Validaciones.isValid(this._clave, getString(R.string.mgsErrorClave));
+            if (isValidEmail && isValidPassword) {
+                String correo = this._correo.getEditText().getText().toString();
+                String clave = this._clave.getEditText().getText().toString();
+                auth.Login(correo, clave, navigation);
+            } else {
+                Mensajes.MensajeSnackBar(view, getString(R.string.mgsErrorGeneral), Snackbar.LENGTH_SHORT);
+            }
         });
     }
 

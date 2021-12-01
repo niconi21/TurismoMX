@@ -2,20 +2,21 @@ package com.niconi21.turismoargentina.services;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.navigation.NavController;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.material.snackbar.Snackbar;
 import com.niconi21.turismoargentina.R;
-import com.niconi21.turismoargentina.models.ResponseCustom;
+import com.niconi21.turismoargentina.db.SingletonDB;
+import com.niconi21.turismoargentina.db.UsuarioEntity;
+import com.niconi21.turismoargentina.models.Result;
 import com.niconi21.turismoargentina.models.Usuario;
-import com.niconi21.turismoargentina.tools.Mensajes;
 import com.niconi21.turismoargentina.tools.Navegacion;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -33,54 +34,66 @@ public class AuthServices {
     }
 
     public void Login(String correo, String clave, NavController navigation) {
-        HashMap<String, String> parametros = new HashMap<>();
+        HashMap<String, Object> parametros = new HashMap<>();
         parametros.put("correo", correo);
         parametros.put("clave", clave);
-        ResponseCustom respuesta = new ResponseCustom();
         JsonObjectRequest peticion = this._peticiones.getJson(Request.Method.POST, context.getString(R.string.URL_API) + this.ENDPOINT + "/login", parametros,
                 response -> {
-                    respuesta.setResponse(response);
-                    Mensajes.MensajeToast(this.context, respuesta.getMessage(), Toast.LENGTH_SHORT);
-                    Navegacion.setNavegacion(navigation, R.id.usuarioActivity);
+                    try {
+                        this._showMessage(response);
+                        if (response.getBoolean("ok")) {
+                            Result result = new Result();
+                            JSONObject resultJson = response.getJSONObject("result");
+                            Usuario usuario = result.parseResultUsuario(resultJson).getUsuario();
+                            UsuarioEntity usuarioEntity = new UsuarioEntity();
+                            usuarioEntity.nombre = usuario.getNombre();
+                            usuarioEntity.correo = usuario.getCorreo();
+                            usuarioEntity.token = result.perseResultToken(resultJson);
+                            SingletonDB.insertUsuario(usuarioEntity);
+                            Navegacion.setNavegacion(navigation, R.id.usuarioActivity);
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 },
-                error -> {
-                    System.out.println(error);
-                });
+                error -> this._showMessage(error)
+        );
         this._peticiones.agregarCola(peticion);
     }
 
     public void registro(Usuario usuario) {
-        HashMap<String, String> parametros = new HashMap<>();
+        HashMap<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", usuario.getNombre());
         parametros.put("correo", usuario.getCorreo());
         parametros.put("clave", usuario.getClave());
-        ResponseCustom respuesta = new ResponseCustom();
         JsonObjectRequest peticion = this._peticiones.getJson(Request.Method.POST, context.getString(R.string.URL_API) + this.ENDPOINT + "/registro", parametros,
-                response -> {
-                    respuesta.setResponse(response);
-                    Mensajes.MensajeSnackBar(this.view, respuesta.getMessage(), Snackbar.LENGTH_SHORT);
-
-                },
-                error -> {
-                    System.out.println(error.networkResponse.statusCode);
-                    error.printStackTrace();
-                });
+                response -> this._showMessage(response)
+                ,
+                error -> this._showMessage(error)
+        );
         this._peticiones.agregarCola(peticion);
     }
 
     public void recuperarClave(String correo) {
-        HashMap<String, String> parametros = new HashMap<>();
+        HashMap<String, Object> parametros = new HashMap<>();
         parametros.put("correo", correo);
-        ResponseCustom respuesta = new ResponseCustom();
         JsonObjectRequest peticion = this._peticiones.getJson(Request.Method.POST, context.getString(R.string.URL_API) + this.ENDPOINT + "/recuperarClave", parametros,
-                response -> {
-                    respuesta.setResponse(response);
-                    Mensajes.MensajeSnackBar(this.view, respuesta.getMessage(), Snackbar.LENGTH_SHORT);
-
-                },
-                error -> {
-                    System.out.println(error);
-                });
+                response -> this._showMessage(response),
+                error -> this._showMessage(error)
+        );
         this._peticiones.agregarCola(peticion);
+    }
+
+    private void _showMessage(VolleyError error) {
+        try {
+            this._peticiones.showMessageSnakbar(this._peticiones.getJson(error.networkResponse), this.view);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void _showMessage(JSONObject response) {
+        this._peticiones.showMessageSnakbar(response, this.view);
     }
 }

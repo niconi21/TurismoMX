@@ -12,9 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.niconi21.turismoargentina.R;
-import com.niconi21.turismoargentina.adapters.PublicacionAdapter;
 import com.niconi21.turismoargentina.models.Publicacion;
-import com.niconi21.turismoargentina.tools.Implementacion;
+import com.niconi21.turismoargentina.services.PublicacionService;
 
 import java.util.ArrayList;
 
@@ -34,20 +33,15 @@ public class PostsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         this._establecerItems(view);
-        this._llenarListaPosts();
+        this._llenarListaPosts(view);
 
     }
     private void _establecerItems(View view) {
         this._recyclerView = (RecyclerView) view.findViewById(R.id.listaPosts);
     }
-    private void _llenarListaPosts() {
-        for (int i = 0; i < 10; i++) {
-            Publicacion publicacion = new Publicacion();
-            publicacion.setTitulo("Posts Titulo " + i);
-            this._publicaciones.add(publicacion);
-        }
-        PublicacionAdapter publicacionAdapter = new PublicacionAdapter(this._publicaciones);
-        Implementacion.llenarListaRecycleView(this.getContext(), this._recyclerView, publicacionAdapter ,this._publicaciones);
+    private void _llenarListaPosts(View view) {
+        PublicacionService publicacionService = new PublicacionService(this.getContext(), view);
+        publicacionService.obtenerPublicaciones(this._recyclerView);
 
     }
 }

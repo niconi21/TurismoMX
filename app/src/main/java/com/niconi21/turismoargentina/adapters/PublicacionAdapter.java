@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +64,12 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
     public class ViewHoldersPublicacion extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView titulo;
+        public TextView usuario;
+        public TextView descripcion;
         public ImageView imagen;
+        public ImageButton editar;
+        public ImageButton eliminar;
+        public ImageButton favorito;
         public CardView card;
         public Context context;
         private Publicacion _publicacion;
@@ -71,26 +77,49 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
         public ViewHoldersPublicacion(@NonNull View itemView) {
             super(itemView);
             this.context = itemView.getContext();
-            this.titulo = (TextView) itemView.findViewById(R.id.tituloPost);
-            this.imagen = (ImageView) itemView.findViewById(R.id.imgPostItem);
-            this.card = (CardView) itemView.findViewById(R.id.cardItemPost);
+            this.titulo = itemView.findViewById(R.id.tituloPost);
+            this.usuario = itemView.findViewById(R.id.usuarioItemPost);
+            this.descripcion = itemView.findViewById(R.id.descripcionItemPost);
+            this.imagen = itemView.findViewById(R.id.imgPostItem);
+            this.card = itemView.findViewById(R.id.cardItemPost);
+            this.editar = itemView.findViewById(R.id.editarPostItem);
+            this.eliminar = itemView.findViewById(R.id.eliminarPostItem);
+            this.favorito = itemView.findViewById(R.id.favoritoPostItem);
+
+        }
+
+        private void _ocultarIconos() {
+            switch (this._publicacion.getTipo()) {
+                case "post":
+                        this.editar.setVisibility(View.GONE);
+                        this.eliminar.setVisibility(View.GONE);
+                    break;
+                case "favorito":
+                    break;
+                case "misPost":
+                    break;
+            }
 
         }
 
         public void asiganarDatos(Publicacion publicacion) {
             this._publicacion = publicacion;
+            this._ocultarIconos();
+            this._publicacion.setImagen("https://turismomx-api.herokuapp.com/public/" + this._publicacion.getImagen());
             this.titulo.setText(publicacion.getTitulo());
-            this.descargarImagen(this.itemView);
+            this.descripcion.setText(publicacion.getDescripcion());
+            this.usuario.setText(publicacion.getUsuario().getNombre());
+            Glide.with(itemView.getContext()).load(this._publicacion.getImagen()).into(this.imagen);
+            this.descargarImagen();
         }
 
-        public void descargarImagen(View itemView) {
+        public void descargarImagen() {
             this.imagen.setOnLongClickListener(v -> {
 
                 BottomSheetDialogFragment bsi = new BottomSheetsImagen();
-                FragmentManager manager = ((AppCompatActivity) context).getSupportFragmentManager();
-                this._publicacion.setImagen("https://cdn2.excelsior.com.mx/media/styles/image800x600/public/pictures/2021/06/09/2592367.jpg");
+
                 ((BottomSheetsImagen) bsi).publicacion = this._publicacion;
-                bsi.show(((FragmentActivity) itemView.getContext()).getSupportFragmentManager(), "etiqueta");
+                bsi.show(((FragmentActivity) this.itemView.getContext()).getSupportFragmentManager(), "etiqueta");
 
                 return true;
             });
@@ -105,7 +134,8 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
             switch (v.getId()) {
                 case R.id.cardItemPost:
                     Intent intent = new Intent(this.context, PostDetalleActivity.class);
-                    intent.putExtra("titulo", this._publicacion.getTitulo());
+                    intent.putExtra("id", this._publicacion.getId());
+
                     ((Activity) context).startActivityForResult(intent, 1);
                     break;
             }

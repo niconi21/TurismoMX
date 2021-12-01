@@ -20,6 +20,7 @@ import com.niconi21.turismoargentina.models.Usuario;
 import com.niconi21.turismoargentina.services.AuthServices;
 import com.niconi21.turismoargentina.tools.Mensajes;
 import com.niconi21.turismoargentina.tools.Navegacion;
+import com.niconi21.turismoargentina.tools.Validaciones;
 
 public class RegistroFragment extends Fragment {
     private Button _btnRegistro;
@@ -53,6 +54,9 @@ public class RegistroFragment extends Fragment {
         this._correo = view.findViewById(R.id.tfCorreoRegistro);
         this._clave = view.findViewById(R.id.tfClaveRegistro);
         this._nombre = view.findViewById(R.id.tfNombreRegistro);
+        Validaciones.textChangedListener(this._correo, getString(R.string.mgsErrorCorreo));
+        Validaciones.textChangedListener(this._clave, getString(R.string.mgsErrorClave));
+        Validaciones.textChangedListener(this._nombre, getString(R.string.mgsErrorNombre));
 
     }
 
@@ -65,12 +69,18 @@ public class RegistroFragment extends Fragment {
     private void _registro(View view) {
         this._btnRegistro.setOnClickListener(v -> {
             Usuario usuario = new Usuario();
-            usuario.setNombre(this._nombre.getEditText().getText().toString());
-            usuario.setCorreo(this._correo.getEditText().getText().toString());
-            usuario.setClave(this._clave.getEditText().getText().toString());
-
             AuthServices auth = new AuthServices(this.getContext(), view);
-            auth.registro(usuario);
+            Boolean isValidEmail = Validaciones.isValid(this._correo, getString(R.string.mgsErrorCorreo));
+            Boolean isValidPassword = Validaciones.isValid(this._clave, getString(R.string.mgsErrorClave));
+            Boolean isValidName = Validaciones.isValid(this._nombre, getString(R.string.mgsErrorNombre));
+            if (isValidEmail && isValidPassword && isValidName) {
+                usuario.setNombre(this._nombre.getEditText().getText().toString());
+                usuario.setCorreo(this._correo.getEditText().getText().toString());
+                usuario.setClave(this._clave.getEditText().getText().toString());
+                auth.registro(usuario);
+            } else {
+                Mensajes.MensajeSnackBar(view, getString(R.string.mgsErrorGeneral), Snackbar.LENGTH_SHORT);
+            }
         });
     }
 }

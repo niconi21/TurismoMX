@@ -1,6 +1,5 @@
 package com.niconi21.turismoargentina.models;
 
-import com.niconi21.turismoargentina.interfaces.IPublicacion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,17 +19,43 @@ public class Publicacion {
     private ArrayList<String> etiquetas = new ArrayList<String>();
     private ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
     private Date fecha = new Date();
+    private String tipo ="";
+
 
     public Publicacion() {
     }
 
-    public Publicacion jsonObjectToPublicacion(JSONObject publicacionJson) {
+    public ArrayList<Publicacion> JsonArrayToPublicaciones(JSONArray publicacionesArray) {
+        ArrayList<Publicacion> publicaciones = new ArrayList<Publicacion>();
+        try {
+            for (int i = 0; i < publicacionesArray.length(); i++) {
+                Publicacion publicacion = new Publicacion();
+                JSONObject actual = publicacionesArray.getJSONObject(i);
+                publicacion.setId(actual.getString("_id"));
+                publicacion.setTitulo(actual.getString("titulo"));
+                publicacion.setDescripcion(actual.getString("descripcion"));
+                publicacion.setImagen(actual.getString("imagen"));
+                publicacion.setUbicacion(publicacion.getUbicacion().jsonObjectToCoordenada(actual.getJSONObject("ubicacion")));
+                publicacion.setEtiquetas(publicacion.jsonArrayToEtiquetas(actual.getJSONArray("etiquetas")));
+                publicacion.setUsuario(publicacion.getUsuario().jsonObjectToUsuario(actual.getJSONObject("usuario"), false, false));
+                publicaciones.add(publicacion);
+            }
+        } catch (Exception ex) {
+
+        } finally {
+            return publicaciones;
+        }
+    }
+
+    public Publicacion jsonObjectToPublicacion(JSONObject publicacionJson, Boolean getUsuario) {
         Publicacion publicacion = new Publicacion();
         try {
+            publicacion.setId(publicacionJson.getString("_id"));
             publicacion.setTitulo(publicacionJson.getString("titulo"));
             publicacion.setDescripcion(publicacionJson.getString("descripcion"));
             publicacion.setUbicacion(this.getUbicacion().jsonObjectToCoordenada(publicacionJson.getJSONObject("ubicacion")));
-            publicacion.setUsuario((new Usuario()).jsonObjectToUsuario(publicacionJson.getJSONObject("usuario")));
+            if (getUsuario)
+                publicacion.setUsuario((new Usuario()).jsonObjectToUsuario(publicacionJson.getJSONObject("usuario"), false, false));
             publicacion.setImagen(publicacionJson.getString("imagen"));
             publicacion.setEtiquetas(this.jsonArrayToEtiquetas(publicacionJson.getJSONArray("etiquetas")));
             publicacion.setComentarios(this.jsonArrayToComentario(publicacionJson.getJSONArray("comentarios")));
@@ -43,7 +68,18 @@ public class Publicacion {
     }
 
     private ArrayList<String> jsonArrayToEtiquetas(JSONArray etiquetasArray) {
-        return null;
+        ArrayList<String> etiquetas = new ArrayList<String>();
+        try {
+            for (int i = 0; i < etiquetasArray.length(); i++) {
+                etiquetas.add(etiquetasArray.get(i).toString());
+                System.out.println(etiquetasArray.get(i));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            return etiquetas;
+
+        }
     }
 
     private ArrayList<Comentario> jsonArrayToComentario(JSONArray comentariosArray) {
@@ -122,5 +158,26 @@ public class Publicacion {
         this.fecha = fecha;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
 
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Publicacion{" +
+                "id='" + id + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", ubicacion=" + ubicacion +
+                ", usuario=" + usuario +
+                ", etiquetas=" + etiquetas +
+                ", comentarios=" + comentarios +
+                ", fecha=" + fecha +
+                '}';
+    }
 }

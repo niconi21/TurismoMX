@@ -19,6 +19,7 @@ import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.services.AuthServices;
 import com.niconi21.turismoargentina.tools.Mensajes;
 import com.niconi21.turismoargentina.tools.Navegacion;
+import com.niconi21.turismoargentina.tools.Validaciones;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,6 +53,7 @@ public class ForgotFragment extends Fragment {
 
         this._btnReestablecer = view.findViewById(R.id.btnReestablecerForgot);
         this._correo = view.findViewById(R.id.tfCorreoForgot);
+        Validaciones.textChangedListener(this._correo, getString(R.string.mgsErrorCorreo));
     }
 
     private void _navegacionFragment(View view) {
@@ -62,9 +64,14 @@ public class ForgotFragment extends Fragment {
 
     private void _recuperarClave(View view) {
         this._btnReestablecer.setOnClickListener(v -> {
-            String correo = this._correo.getEditText().getText().toString();
             AuthServices auth = new AuthServices(this.getContext(), view);
-            auth.recuperarClave(correo);
+            Boolean isValidEmail = Validaciones.isValid(this._correo, getString(R.string.mgsErrorCorreo));
+            if (isValidEmail) {
+                String correo = this._correo.getEditText().getText().toString();
+                auth.recuperarClave(correo);
+            } else {
+                Mensajes.MensajeSnackBar(view, getString(R.string.mgsErrorGeneral), Snackbar.LENGTH_SHORT);
+            }
 
         });
 

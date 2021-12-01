@@ -46,9 +46,10 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return "Coordenada{" +
-                "latitud=" + latitud +
-                ", altitud=" + altitud +
+        return "{" +
+                "\"latitud\":" + latitud +
+                ", \"altitud\":" + altitud +
                 '}';
     }
+
 }

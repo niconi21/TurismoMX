@@ -88,7 +88,8 @@ public class BottomSheetsImagen extends BottomSheetDialogFragment {
 
         this.descargar.setOnClickListener(v -> {
             Bitmap imagen = getBitmapFromURL(this.publicacion.getImagen());
-            if(imagen!=null) {//Glide.with(v.getContext()).load(this.imagen).into(iv);
+            System.out.println(this.publicacion);
+            if(imagen!=null) {
                 MediaStore.Images.Media.insertImage(v.getContext().getContentResolver(), imagen, this.publicacion.getTitulo(), this.publicacion.getDescripcion());
                 Toast.makeText(v.getContext(), R.string.imagenSave, Toast.LENGTH_LONG).show();
             }else{

@@ -1,5 +1,7 @@
 package com.niconi21.turismoargentina.models;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -9,6 +11,7 @@ import java.util.Date;
 public class Usuario {
 
     private String nombre = "";
+    private String id = "";
     private String clave = "";
     private String correo = "";
     private Date fechaAlta = null;
@@ -17,18 +20,28 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario jsonObjectToUsuario(JSONObject usuarioJson) {
+    public Usuario jsonObjectToUsuario(JSONObject usuarioJson, Boolean getCorreo, Boolean getFecha) {
         Usuario usuario = new Usuario();
         try {
+            usuario.setId(usuarioJson.getString("_id"));
             usuario.setNombre(usuarioJson.getString("nombre"));
-            usuario.setClave(usuarioJson.getString("clave"));
-            usuario.setCorreo(usuarioJson.getString("correo"));
-            usuario.setFechaAlta(((Date) usuarioJson.get("fechaAlta")));
+            if (getCorreo)
+                usuario.setCorreo(usuarioJson.getString("correo"));
+            if (getFecha)
+                usuario.setFechaAlta(((Date) usuarioJson.get("fechaAlta")));
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
             return usuario;
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -71,4 +84,10 @@ public class Usuario {
         this.favoritos = favoritos;
     }
 
+    @NonNull
+    @Override
+    public String toString() {
+        return "Nombre: " + getNombre() +
+                "correo: " + getCorreo();
+    }
 }

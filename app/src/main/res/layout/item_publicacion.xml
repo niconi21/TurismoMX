@@ -73,24 +73,27 @@
                     android:orientation="horizontal">
 
                     <ImageButton
+                        android:id="@+id/editarPostItem"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:background="@android:color/transparent"
-                        android:contentDescription="Descripción xd"
+                        android:contentDescription="@string/editarPost"
                         android:src="@drawable/ic_baseline_edit_24" />
 
                     <ImageButton
+                        android:id="@+id/eliminarPostItem"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:background="@android:color/transparent"
-                        android:contentDescription="Descripción xd"
+                        android:contentDescription="@string/eliminarPost"
                         android:src="@drawable/ic_baseline_delete_forever_24" />
 
                     <ImageButton
+                        android:id="@+id/favoritoPostItem"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
                         android:background="@android:color/transparent"
-                        android:contentDescription="Descripción xd"
+                        android:contentDescription="@string/favoritoPost"
                         android:src="@drawable/ic_baseline_favorite_24" />
                 </LinearLayout>
 
@@ -117,19 +120,33 @@
                 android:padding="20dp">
 
                 <TextView
+                    android:id="@+id/descripcionItemPost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"
                     android:text="Descripción de la publicación Descripción de la publicación Descripción de la publicación Descripción de la publicación"
                     android:textSize="@dimen/size_description" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Subido por Nicolas Moreno Duran"
-                    android:textSize="@dimen/size_data"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Subido por "
+                        android:textSize="@dimen/size_data"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/usuarioItemPost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Nicolas Moreno Duran"
+                        android:textSize="@dimen/size_data"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

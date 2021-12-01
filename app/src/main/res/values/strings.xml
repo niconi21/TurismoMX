@@ -8,7 +8,7 @@
     <string name="registrarse">Registrarse</string>
     <string name="recuperarClave">Recuperar contraseña</string>
     <string name="reestablecerClave">Reestablecer</string>
-    <string name="recordarClave">¿Recordar contraseña?</string>
+    <string name="recordarCorreo">¿Recordar correo?</string>
     <!--    Regsitro    -->
     <string name="registro">Registro</string>
     <string name="tienesCuenta">¿Ya tienes una cuenta?</string>
@@ -32,7 +32,7 @@
 
     <!--  Perfil fragment  -->
     <string name="infoUsuario">Información del usuario</string>
-    <string name="actualizarDatos">Actualizar datos</string>
+    <string name="actualizarCorreo">Actualizar correo</string>
     <string name="actualizarContraseña">Actualizar contraseña</string>
     <string name="cerrarSesion">Cerrar sesión</string>
     <string name="imgPerfil">Imágen de perfil</string>
@@ -42,17 +42,36 @@
     <string name="imagenDontSave">No se pudo dscargar la imagen</string>
 
     <!--  Datos post activity  -->
+    <string name="titulo">Titulo</string>
     <string name="descripcion">Descripción</string>
     <string name="ubicacion">Ubicación</string>
     <string name="etiquetas">Etiquetas</string>
     <string name="subirPost">Subir publicación</string>
     <string name="cancelar">Cancelar</string>
+    <string name="postEnviado">Post enviado</string>
 
+    <!--  Post Item  -->
+    <string name="editarPost">Editar</string>
+    <string name="eliminarPost">Eliminar</string>
+    <string name="favoritoPost">Marcas cómo favorito</string>
 
     <!--  BottomSheetsImagen  -->
     <string name="compartir">Compartir</string>
     <string name="descargarImagen">Descargar imagen</string>
 
-<!--  API  -->
+    <!--  Mensajes de error validaciones  -->
+    <string name="mgsErrorCorreo">Es necesario el correo</string>
+    <string name="mgsErrorClave">Es necesaria la contraseña</string>
+    <string name="mgsErrorNombre">Es necesario el nombre</string>
+    <string name="mgsErrorGeneral">Llena todos los datos correspondientes</string>
+
+    <string name="mgsErrorTitulo">Es necesario el título</string>
+    <string name="mgsErrorDescripcion">Es necesaria la descripción</string>
+    <string name="mgsErrorEtiqueta">Es necesaria la etiqueta</string>
+
+    <!--  API  -->
     <string name="URL_API">https://turismomx-api.herokuapp.com/api/v1</string>
+
+    <!--  DataBase  -->
+    <string name="DB_NAME">turismoMX</string>
 </resources>
