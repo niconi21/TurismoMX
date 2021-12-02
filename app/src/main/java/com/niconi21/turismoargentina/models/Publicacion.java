@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class Publicacion {
     private ArrayList<String> etiquetas = new ArrayList<String>();
     private ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
     private Date fecha = new Date();
-    private String tipo ="";
+    private String tipo = "";
 
 
     public Publicacion() {
@@ -41,7 +42,7 @@ public class Publicacion {
                 publicaciones.add(publicacion);
             }
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         } finally {
             return publicaciones;
         }
@@ -57,7 +58,7 @@ public class Publicacion {
             if (getUsuario)
                 publicacion.setUsuario((new Usuario()).jsonObjectToUsuario(publicacionJson.getJSONObject("usuario"), false, false));
             publicacion.setImagen(publicacionJson.getString("imagen"));
-            publicacion.setEtiquetas(this.jsonArrayToEtiquetas(publicacionJson.getJSONArray("etiquetas")));
+            publicacion.setEtiquetas(this.jsonArrayToEtiquetas(publicacionJson.getJSONArray("ṕetiquetas")));
             publicacion.setComentarios(this.jsonArrayToComentario(publicacionJson.getJSONArray("comentarios")));
             publicacion.setFecha(((Date) publicacionJson.get("fecha")));
         } catch (JSONException e) {
@@ -72,7 +73,6 @@ public class Publicacion {
         try {
             for (int i = 0; i < etiquetasArray.length(); i++) {
                 etiquetas.add(etiquetasArray.get(i).toString());
-                System.out.println(etiquetasArray.get(i));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -83,7 +83,23 @@ public class Publicacion {
     }
 
     private ArrayList<Comentario> jsonArrayToComentario(JSONArray comentariosArray) {
-        return null;
+        ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
+        try {
+            for (int i = 0; i < comentariosArray.length(); i++) {
+                JSONObject comentarioJson = comentariosArray.getJSONObject(i);
+                Comentario comentario = new Comentario();
+
+                comentario.setComentario(comentarioJson.getString("comentario"));
+                comentario.setUsuario((new Usuario()).jsonObjectToUsuario(comentarioJson.getJSONObject("usuario"), false, false));
+
+                comentarios.add(((Comentario) comentariosArray.get(i)));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            return comentarios;
+
+        }
     }
 
     public String getId() {
@@ -150,8 +166,8 @@ public class Publicacion {
         this.comentarios = comentarios;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getFecha() {
+        return DateFormat.getDateInstance(DateFormat.LONG).format(this.fecha);
     }
 
     public void setFecha(Date fecha) {

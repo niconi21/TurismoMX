@@ -15,6 +15,7 @@ import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.adapters.PublicacionAdapter;
 import com.niconi21.turismoargentina.models.Publicacion;
 import com.niconi21.turismoargentina.models.Usuario;
+import com.niconi21.turismoargentina.services.PublicacionService;
 import com.niconi21.turismoargentina.tools.Implementacion;
 
 import java.util.ArrayList;
@@ -35,25 +36,26 @@ public class FavoritosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this._establecerItems(view);
-        this._llenarListaPosts();
+        this._llenarListaPosts(view);
     }
 
     private void _establecerItems(View view){
-        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaPostFavoritos);
+        this._recyclerView = view.findViewById(R.id.listaPostFavoritos);
 
     }
 
-    private void _llenarListaPosts() {
+    private void _llenarListaPosts(View view) {
 
-
-
-        for (int i = 0; i < 100; i++) {
-            Publicacion publicacion = new Publicacion();
-            publicacion.setTitulo("Favorito titulo " + i);
-            this._publicaciones.add(publicacion);
-        }
-
-        PublicacionAdapter publicacionAdapter = new PublicacionAdapter(this._publicaciones);
-        Implementacion.llenarListaRecycleView(this.getContext(), this._recyclerView, publicacionAdapter ,this._publicaciones);
+        PublicacionService publicacionService = new PublicacionService(this.getContext(), view);
+        publicacionService.obtenerFavoritos(this._recyclerView);
+//
+//        for (int i = 0; i < 100; i++) {
+//            Publicacion publicacion = new Publicacion();
+//            publicacion.setTitulo("Favorito titulo " + i);
+//            this._publicaciones.add(publicacion);
+//        }
+//
+//        PublicacionAdapter publicacionAdapter = new PublicacionAdapter(this._publicaciones);
+//        Implementacion.llenarListaRecycleView(this.getContext(), this._recyclerView, publicacionAdapter ,this._publicaciones);
     }
 }

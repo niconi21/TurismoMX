@@ -2,6 +2,10 @@ package com.niconi21.turismoargentina.services;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Environment;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,20 +14,28 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.niconi21.turismoargentina.DatosPostActivity;
+import com.niconi21.turismoargentina.PostDetalleActivity;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.adapters.PublicacionAdapter;
 import com.niconi21.turismoargentina.models.Publicacion;
 import com.niconi21.turismoargentina.models.Result;
-import com.niconi21.turismoargentina.models.Usuario;
 import com.niconi21.turismoargentina.tools.Implementacion;
-import com.niconi21.turismoargentina.tools.Navegacion;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PublicacionService {
 
@@ -38,15 +50,86 @@ public class PublicacionService {
         this._peticiones = new Peticiones(context);
     }
 
+    public void obtenerPublicacion(PostDetalleActivity activity, String id) {
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/post/" + id, new JSONObject(),
+                response -> {
+                    try {
+                        Result result = new Result();
+                        Publicacion publicacion = result.parseResultPublicacionPost(response.getJSONObject("result"), true).getPublicacion();
+                        activity.establecerDatos(publicacion);
+                    } catch (JSONException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                ,
+                error -> {
+                    this._showMessage(error);
+                }
+        );
+        this._peticiones.agregarCola(peticion);
+    }
+
     @SuppressLint("NewApi")
     public void obtenerPublicaciones(RecyclerView recyclerView) {
-         JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/todas", new JSONObject(),
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/todas", new JSONObject(),
                 response -> {
                     try {
                         Result result = new Result();
                         ArrayList<Publicacion> publicaciones = result.parseResultPublicaciones(response.getJSONObject("result")).getPublicaciones();
-                        publicaciones.forEach( publicacion -> {
+                        publicaciones.forEach(publicacion -> {
                             publicacion.setTipo("post");
+                        });
+                        PublicacionAdapter publicacionAdapter = new PublicacionAdapter(publicaciones);
+                        Implementacion.llenarListaRecycleView(this.context, recyclerView, publicacionAdapter, publicaciones);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ,
+                error -> {
+                    this._showMessage(error);
+                }
+        );
+
+        this._peticiones.agregarCola(peticion);
+    }
+
+    @SuppressLint("NewApi")
+    public void obtenerMisPublicaciones(RecyclerView recyclerView) {
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/propios", new JSONObject(),
+                response -> {
+                    try {
+                        Result result = new Result();
+                        ArrayList<Publicacion> publicaciones = result.parseResultPublicaciones(response.getJSONObject("result")).getPublicaciones();
+                        publicaciones.forEach(publicacion -> {
+                            publicacion.setTipo("misPost");
+                        });
+                        PublicacionAdapter publicacionAdapter = new PublicacionAdapter(publicaciones);
+                        Implementacion.llenarListaRecycleView(this.context, recyclerView, publicacionAdapter, publicaciones);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ,
+                error -> {
+                    this._showMessage(error);
+                }
+        );
+
+        this._peticiones.agregarCola(peticion);
+    }
+
+    @SuppressLint("NewApi")
+    public void obtenerFavoritos(RecyclerView recyclerView) {
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/favoritos", new JSONObject(),
+                response -> {
+                    try {
+                        Result result = new Result();
+                        ArrayList<Publicacion> publicaciones = result.parseResultPublicaciones(response.getJSONObject("result")).getPublicaciones();
+                        publicaciones.forEach(publicacion -> {
+                            publicacion.setTipo("favorito");
                         });
                         PublicacionAdapter publicacionAdapter = new PublicacionAdapter(publicaciones);
                         Implementacion.llenarListaRecycleView(this.context, recyclerView, publicacionAdapter, publicaciones);
@@ -66,7 +149,7 @@ public class PublicacionService {
 
 
     @SuppressLint("NewApi")
-    public void agregarPublicacion(Publicacion publicacion, DatosPostActivity activity) {
+    public void agregarPublicacion(Publicacion publicacion, DatosPostActivity activity, Bitmap img) {
         try {
             JSONObject body = new JSONObject();
             JSONObject ubicacion = new JSONObject();
@@ -74,7 +157,7 @@ public class PublicacionService {
             String[] etiquetas = new String[publicacion.getEtiquetas().size()];
             etiquetas = publicacion.getEtiquetas().toArray(etiquetas);
 
-            ubicacion.put("altitud", publicacion.getUbicacion().getAltitud());
+            ubicacion.put("altitud", publicacion.getUbicacion().getLongitud());
             ubicacion.put("latitud", publicacion.getUbicacion().getLatitud());
 
             body.put("titulo", publicacion.getTitulo());
@@ -86,8 +169,9 @@ public class PublicacionService {
                         try {
                             this._showMessage(response);
                             Result result = new Result();
-                            String id = result.parseResultPublicacion(response.getJSONObject("result")).getPublicacion().getId();
+                            String id = result.parseResultPublicacionPost(response.getJSONObject("result"), false).getPublicacion().getId();
                             //Subir imagen
+//                            this._subirImagen(id, img);
                             activity.regresar(this.view);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -104,6 +188,80 @@ public class PublicacionService {
             e.printStackTrace();
         }
     }
+
+
+    private void _subirImagen(String _id, Bitmap imagen) {
+        HttpURLConnection conn = null;
+        DataOutputStream dos = null;
+        DataInputStream inStream = null;
+        String existingFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/mypic.png";
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        String urlString = "https://turismomx-api.herokuapp.com/api/v1/archivo/subir/imagen/post/"+_id;
+
+        try {
+
+            //------------------ CLIENT REQUEST
+            FileInputStream fileInputStream = new FileInputStream(new File(existingFileName));
+            // open a URL connection to the Servlet
+            URL url = new URL(urlString);
+            // Open a HTTP connection to the URL
+            conn = (HttpURLConnection) url.openConnection();
+            // Allow Inputs
+            conn.setDoInput(true);
+            // Allow Outputs
+            conn.setDoOutput(true);
+            // Don't use a cached copy.
+            conn.setUseCaches(false);
+            // Use a post method.
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+            dos = new DataOutputStream(conn.getOutputStream());
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name=\"imagen\";filename=\"" + existingFileName + "\"" + lineEnd);
+            dos.writeBytes(lineEnd);
+            // create a buffer of maximum size
+            bytesAvailable = fileInputStream.available();
+            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            buffer = new byte[bufferSize];
+            // read file and write it into form...
+            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0) {
+
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            }
+
+            // send multipart form data necesssary after file data...
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+            // close streams
+            Log.e("Debug", "File is written");
+            fileInputStream.close();
+            dos.flush();
+            dos.close();
+
+        } catch (MalformedURLException ex) {
+            Log.e("Debug", "error: " + ex.getMessage(), ex);
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException ioe) {
+            Log.e("Debug", "error: " + ioe.getMessage(), ioe);
+        }
+
+        //------------------ read the SERVER RESPONSE
+
+    }
+
 
     private void _showMessage(VolleyError error) {
         try {

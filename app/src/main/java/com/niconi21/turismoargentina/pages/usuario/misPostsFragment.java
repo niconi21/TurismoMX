@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.adapters.PublicacionAdapter;
 import com.niconi21.turismoargentina.models.Publicacion;
+import com.niconi21.turismoargentina.services.PublicacionService;
 import com.niconi21.turismoargentina.tools.Implementacion;
 
 import java.util.ArrayList;
@@ -36,19 +37,15 @@ public class misPostsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this._establecerItems(view);
-        this._llenarListaPosts();
+        this._llenarListaPosts(view);
     }
 
     private void _establecerItems(View view) {
-        this._recyclerView = (RecyclerView) view.findViewById(R.id.listaMisPosts);
+        this._recyclerView = view.findViewById(R.id.listaMisPosts);
     }
-        private void _llenarListaPosts() {
-        for (int i = 0; i < 100; i++) {
-            Publicacion publicacion = new Publicacion();
-            publicacion.setTitulo("Mi post Titulo " + i);
-            this._misPosts.add(publicacion);
-        }
-        PublicacionAdapter publicacionAdapter = new PublicacionAdapter(this._misPosts);
-        Implementacion.llenarListaRecycleView(this.getContext(), this._recyclerView, publicacionAdapter, this._misPosts);
+
+    private void _llenarListaPosts(View view) {
+        PublicacionService publicacionService = new PublicacionService(this.getContext(), view);
+        publicacionService.obtenerMisPublicaciones(this._recyclerView);
     }
 }

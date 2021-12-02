@@ -18,10 +18,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.UsuarioActivity;
+import com.niconi21.turismoargentina.services.MapaService;
 import com.niconi21.turismoargentina.tools.Permisos;
 
 public class MapaFragment extends Fragment {
@@ -45,8 +47,12 @@ public class MapaFragment extends Fragment {
                 this._fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
                 this._fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
                     LatLng actual = new LatLng(location.getLatitude(), location.getLongitude());
-                    googleMap.addMarker(new MarkerOptions().position(actual).title("Tu ubicación"));
+                    MarkerOptions marca = new MarkerOptions().position(actual).title("Tu ubicación");
+                    marca.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    googleMap.addMarker(marca);
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(actual));
+                    MapaService mapaService = new MapaService(getContext(), getView());
+                    mapaService.obtenerPublicaciones(googleMap);
                 });
             }
 

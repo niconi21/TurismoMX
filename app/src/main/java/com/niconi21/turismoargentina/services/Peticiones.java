@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class Peticiones {
@@ -48,6 +49,29 @@ public class Peticiones {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 return headers;
+            }
+        };
+    }
+    public JsonObjectRequest getJsonWithHeaderIMG(int metodo, String url,  Response.Listener<JSONObject> res, Response.ErrorListener error, String img) {
+        Map<String, String> headers = new HashMap<String, String >();
+        headers.put("token", SingletonDB.getToken());
+        headers.put("Content-Type", "application/json");
+        return new JsonObjectRequest(metodo, url, null, res, error) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                //Creación de parámetros
+                Map<String,String> params = new Hashtable<String, String>();
+
+                //Agregando de parámetros
+                params.put("imagen", img);
+                //Parámetros de retorno
+                return params;
             }
         };
     }

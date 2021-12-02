@@ -64,6 +64,7 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
     public class ViewHoldersPublicacion extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView titulo;
+        public TextView fecha;
         public TextView usuario;
         public TextView descripcion;
         public ImageView imagen;
@@ -78,6 +79,7 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
             super(itemView);
             this.context = itemView.getContext();
             this.titulo = itemView.findViewById(R.id.tituloPost);
+            this.fecha = itemView.findViewById(R.id.fechaPost);
             this.usuario = itemView.findViewById(R.id.usuarioItemPost);
             this.descripcion = itemView.findViewById(R.id.descripcionItemPost);
             this.imagen = itemView.findViewById(R.id.imgPostItem);
@@ -105,8 +107,8 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
         public void asiganarDatos(Publicacion publicacion) {
             this._publicacion = publicacion;
             this._ocultarIconos();
-            this._publicacion.setImagen("https://turismomx-api.herokuapp.com/public/" + this._publicacion.getImagen());
             this.titulo.setText(publicacion.getTitulo());
+            this.fecha.setText(publicacion.getFecha());
             this.descripcion.setText(publicacion.getDescripcion());
             this.usuario.setText(publicacion.getUsuario().getNombre());
             Glide.with(itemView.getContext()).load(this._publicacion.getImagen()).into(this.imagen);

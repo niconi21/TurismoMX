@@ -5,7 +5,7 @@ import org.json.JSONObject;
 
 public class Coordenada {
     private double latitud;
-    private double altitud;
+    private double longitud;
 
     public Coordenada() {
         this(0, 0);
@@ -13,14 +13,14 @@ public class Coordenada {
 
     public Coordenada(double latitud, double longitud) {
         this.setLatitud(latitud);
-        this.setAltitud(longitud);
+        this.setLongitud(longitud);
     }
 
     public Coordenada jsonObjectToCoordenada(JSONObject coordenadaJson) {
         Coordenada coordenada = new Coordenada();
         try {
             coordenada.setLatitud(coordenadaJson.getDouble("latitud"));
-            coordenada.setAltitud(coordenadaJson.getDouble("altitud"));
+            coordenada.setLongitud(coordenadaJson.getDouble("altitud"));
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
@@ -36,19 +36,19 @@ public class Coordenada {
         this.latitud = latitud;
     }
 
-    public double getAltitud() {
-        return altitud;
+    public double getLongitud() {
+        return longitud;
     }
 
-    public void setAltitud(double altitud) {
-        this.altitud = altitud;
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
     @Override
     public String toString() {
         return "{" +
                 "\"latitud\":" + latitud +
-                ", \"altitud\":" + altitud +
+                ", \"altitud\":" + longitud +
                 '}';
     }
 

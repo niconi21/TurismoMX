@@ -47,10 +47,10 @@ public class Result {
         return result;
     }
 
-    public Result parseResultPublicacion(JSONObject resultJson) {
+    public Result parseResultPublicacionPost(JSONObject resultJson, Boolean getUsuario) {
         Result result = new Result();
         try {
-            result.setPublicacion(this.publicacion.jsonObjectToPublicacion(resultJson.getJSONObject("publicacion"), false));
+            result.setPublicacion(this.publicacion.jsonObjectToPublicacion(resultJson.getJSONObject("publicacion"), getUsuario));
         } catch (JSONException e) {
             e.printStackTrace();
         }

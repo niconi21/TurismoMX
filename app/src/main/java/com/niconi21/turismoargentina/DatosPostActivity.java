@@ -93,7 +93,8 @@ public class DatosPostActivity extends AppCompatActivity {
     private void _ubicacion() {
         if (Permisos.permisoUbicacion(getApplicationContext(), this)) {
             this._fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
-                this._coordenadas = new Coordenada(location.getLatitude(), location.getAltitude());
+                this._coordenadas = new Coordenada(location.getLatitude(), location.getLongitude());
+
             });
         }else{
             Mensajes.MensajeToast(this, "Acceso a la ubicación denegado", Toast.LENGTH_SHORT);
@@ -138,7 +139,8 @@ public class DatosPostActivity extends AppCompatActivity {
                 publicacion.setEtiquetas(this._tags);
 
                 PublicacionService publicacionService = new PublicacionService(this.getApplicationContext(), v);
-                publicacionService.agregarPublicacion(publicacion,this);
+                publicacionService.agregarPublicacion(publicacion,this, this._imgIntent);
+
             }else{
                 Mensajes.MensajeSnackBar(v, getString(R.string.mgsErrorGeneral), Snackbar.LENGTH_SHORT);
             }

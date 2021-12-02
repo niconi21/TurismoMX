@@ -71,6 +71,7 @@
 
     <!--  API  -->
     <string name="URL_API">https://turismomx-api.herokuapp.com/api/v1</string>
+<!--    <string name="URL_API">http://192.168.1.71:3000/api/v1</string>-->
 
     <!--  DataBase  -->
     <string name="DB_NAME">turismoMX</string>
