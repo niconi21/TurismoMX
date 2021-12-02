@@ -17,6 +17,7 @@ import com.niconi21.turismoargentina.DatosPostActivity;
 import com.niconi21.turismoargentina.PostDetalleActivity;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.adapters.PublicacionAdapter;
+import com.niconi21.turismoargentina.db.SingletonDB;
 import com.niconi21.turismoargentina.models.Publicacion;
 import com.niconi21.turismoargentina.models.Result;
 import com.niconi21.turismoargentina.tools.Implementacion;
@@ -30,7 +31,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -171,7 +174,7 @@ public class PublicacionService {
                             Result result = new Result();
                             String id = result.parseResultPublicacionPost(response.getJSONObject("result"), false).getPublicacion().getId();
                             //Subir imagen
-//                            this._subirImagen(id, img);
+                            this._subirImagen(id, img);
                             activity.regresar(this.view);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -191,10 +194,11 @@ public class PublicacionService {
 
 
     private void _subirImagen(String _id, Bitmap imagen) {
+        this._crearArchivo(imagen);
         HttpURLConnection conn = null;
         DataOutputStream dos = null;
         DataInputStream inStream = null;
-        String existingFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/mypic.png";
+        String existingFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/imagen.png";
         String lineEnd = "\r\n";
         String twoHyphens = "--";
         String boundary = "*****";
@@ -204,9 +208,12 @@ public class PublicacionService {
         String urlString = "https://turismomx-api.herokuapp.com/api/v1/archivo/subir/imagen/post/"+_id;
 
         try {
-
+            System.out.println("abriendo archivo");
+            File filesDir = this.context.getFilesDir();
+            File imageFile = new File(filesDir, "imagen.jpg");
+            System.out.println(imageFile.getAbsolutePath());
             //------------------ CLIENT REQUEST
-            FileInputStream fileInputStream = new FileInputStream(new File(existingFileName));
+            FileInputStream fileInputStream = new FileInputStream(imageFile);
             // open a URL connection to the Servlet
             URL url = new URL(urlString);
             // Open a HTTP connection to the URL
@@ -221,6 +228,7 @@ public class PublicacionService {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Connection", "Keep-Alive");
             conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+            conn.setRequestProperty("token", SingletonDB.getToken());
             dos = new DataOutputStream(conn.getOutputStream());
             dos.writeBytes(twoHyphens + boundary + lineEnd);
             dos.writeBytes("Content-Disposition: form-data; name=\"imagen\";filename=\"" + existingFileName + "\"" + lineEnd);
@@ -259,9 +267,39 @@ public class PublicacionService {
         }
 
         //------------------ read the SERVER RESPONSE
+        try {
 
+            inStream = new DataInputStream(conn.getInputStream());
+            String str;
+
+            while ((str = inStream.readLine()) != null) {
+
+                Log.e("Debug", "Server Response " + str);
+
+            }
+            inStream.close();
+
+        } catch (IOException ioex) {
+            Log.e("Debug", "error: " + ioex.getMessage(), ioex);
+        }
     }
 
+    private void _crearArchivo(Bitmap imagen){
+        System.out.println("Creando archivo");
+        File filesDir = this.context.getFilesDir();
+        File imageFile = new File(filesDir, "imagen.jpg");
+
+        OutputStream os;
+        try {
+            os = new FileOutputStream(imageFile);
+            imagen.compress(Bitmap.CompressFormat.JPEG, 100, os);
+            os.flush();
+            os.close();
+        } catch (Exception e) {
+            Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
+        }
+
+    }
 
     private void _showMessage(VolleyError error) {
         try {
