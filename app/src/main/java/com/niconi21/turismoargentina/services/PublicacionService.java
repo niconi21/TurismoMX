@@ -57,6 +57,7 @@ public class PublicacionService {
         JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/post/" + id, new JSONObject(),
                 response -> {
                     try {
+                        System.out.println(response.toString());
                         Result result = new Result();
                         Publicacion publicacion = result.parseResultPublicacionPost(response.getJSONObject("result"), true).getPublicacion();
                         activity.establecerDatos(publicacion);

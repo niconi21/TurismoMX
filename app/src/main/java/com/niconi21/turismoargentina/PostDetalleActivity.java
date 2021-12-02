@@ -61,6 +61,7 @@ public class PostDetalleActivity extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     public void establecerDatos(Publicacion publicacion) {
+        System.out.println(publicacion);
         this._usuario.setText(publicacion.getUsuario().getNombre());
         this._titulo.setText(publicacion.getTitulo());
         publicacion.getEtiquetas().forEach( etiqueta ->{
@@ -76,7 +77,6 @@ public class PostDetalleActivity extends AppCompatActivity {
     }
 
     private void _llenarComentarios() {
-
 
         ComentarioAdapter comentarioAdapter = new ComentarioAdapter(this._comentarios);
         Implementacion.llenarListaRecycleView(this.getApplicationContext(), this._recyclerView, comentarioAdapter, this._comentarios);

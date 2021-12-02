@@ -93,12 +93,12 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
         private void _ocultarIconos() {
             switch (this._publicacion.getTipo()) {
                 case "post":
+                case "favorito":
                         this.editar.setVisibility(View.GONE);
                         this.eliminar.setVisibility(View.GONE);
                     break;
-                case "favorito":
-                    break;
                 case "misPost":
+                    this.favorito.setVisibility(View.GONE);
                     break;
             }
 

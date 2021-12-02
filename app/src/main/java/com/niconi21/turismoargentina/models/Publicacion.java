@@ -58,7 +58,7 @@ public class Publicacion {
             if (getUsuario)
                 publicacion.setUsuario((new Usuario()).jsonObjectToUsuario(publicacionJson.getJSONObject("usuario"), false, false));
             publicacion.setImagen(publicacionJson.getString("imagen"));
-            publicacion.setEtiquetas(this.jsonArrayToEtiquetas(publicacionJson.getJSONArray("ṕetiquetas")));
+            publicacion.setEtiquetas(this.jsonArrayToEtiquetas(publicacionJson.getJSONArray("etiquetas")));
             publicacion.setComentarios(this.jsonArrayToComentario(publicacionJson.getJSONArray("comentarios")));
             publicacion.setFecha(((Date) publicacionJson.get("fecha")));
         } catch (JSONException e) {
@@ -92,11 +92,13 @@ public class Publicacion {
                 comentario.setComentario(comentarioJson.getString("comentario"));
                 comentario.setUsuario((new Usuario()).jsonObjectToUsuario(comentarioJson.getJSONObject("usuario"), false, false));
 
-                comentarios.add(((Comentario) comentariosArray.get(i)));
+                comentarios.add(comentario);
             }
         } catch (JSONException e) {
+
             e.printStackTrace();
         } finally {
+            System.out.println(comentarios);
             return comentarios;
 
         }
