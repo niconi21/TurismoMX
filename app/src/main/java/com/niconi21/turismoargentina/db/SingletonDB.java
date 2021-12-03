@@ -22,6 +22,10 @@ public class SingletonDB {
         DATABASE.usuarioDao().insertUsuario(usuarioEntity);
     }
 
+    public static void updateUsuario(String nombre, String correo, int id) {
+        DATABASE.usuarioDao().updateUsuarios(nombre, correo, id);
+    }
+
     public static void deleteUsuarios() {
         DATABASE.usuarioDao().deleteUsuarios();
     }

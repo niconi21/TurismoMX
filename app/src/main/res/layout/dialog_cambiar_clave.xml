@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="@string/claveActual"
-            app:endIconMode="clear_text"
+            app:endIconMode="password_toggle"
             app:startIconDrawable="@drawable/ic_baseline_vpn_key_24">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:hint="@string/claveNueva"
-            app:endIconMode="clear_text"
+            app:endIconMode="password_toggle"
             app:startIconDrawable="@drawable/ic_baseline_vpn_key_24">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

@@ -33,6 +33,25 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfNombrePerfil"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/nombre"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_baseline_person_24">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfCorreoPerfil"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,7 +63,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textWebEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,9 +79,10 @@
         android:layout_marginBottom="20dp">
 
         <Button
+            android:id="@+id/btnActualizarUsuarioPerfil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/actualizarCorreo"
+            android:text="@string/actualizar"
             android:textColor="@color/white" />
 
         <Button
@@ -86,7 +107,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cabiar de idioma"
+            android:text="Cambiar de idioma"
             android:textSize="@dimen/size_titles"
             android:layout_marginBottom="10dp"/>
         <com.google.android.material.button.MaterialButtonToggleGroup

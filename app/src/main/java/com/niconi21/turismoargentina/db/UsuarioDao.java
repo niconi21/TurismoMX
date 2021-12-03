@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -18,6 +19,9 @@ public interface UsuarioDao {
 
     @Query("DELETE FROM UsuarioEntity")
     void deleteUsuarios();
+
+    @Query("UPDATE UsuarioEntity SET nombre = :nombre,  correo = :correo WHERE uid = :uid")
+    void updateUsuarios(String nombre, String correo, int uid);
 
 
 }

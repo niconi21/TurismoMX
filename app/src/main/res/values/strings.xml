@@ -32,7 +32,7 @@
 
     <!--  Perfil fragment  -->
     <string name="infoUsuario">Información del usuario</string>
-    <string name="actualizarCorreo">Actualizar correo</string>
+    <string name="actualizar">Actualizar información</string>
     <string name="actualizarContraseña">Actualizar contraseña</string>
     <string name="cerrarSesion">Cerrar sesión</string>
     <string name="imgPerfil">Imágen de perfil</string>
@@ -67,6 +67,8 @@
     <!--  Mensajes de error validaciones  -->
     <string name="mgsErrorCorreo">Es necesario el correo</string>
     <string name="mgsErrorClave">Es necesaria la contraseña</string>
+    <string name="mgsErrorClaveActual">Es necesaria la contraseña actual</string>
+    <string name="mgsErrorClaveNueva">Es necesaria la nueva contraseña</string>
     <string name="mgsErrorNombre">Es necesario el nombre</string>
     <string name="mgsErrorGeneral">Llena todos los datos correspondientes</string>
 

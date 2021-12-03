@@ -33,7 +33,6 @@ public class Mensajes {
 
     public static MaterialAlertDialogBuilder Dialogs(Context context, String title, String mensaje) {
         MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(context);
-
         dialogBuilder.setTitle(title);
         dialogBuilder.setMessage(mensaje);
         return dialogBuilder;
