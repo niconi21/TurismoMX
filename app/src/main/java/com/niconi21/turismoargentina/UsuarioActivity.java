@@ -29,6 +29,7 @@ public class UsuarioActivity extends AppCompatActivity {
         this._navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView2);
         Navegacion.configBottomNavigationView(this, this._navHostFragment);
         Navegacion.configMaterialToolbarInicio(this, this._navHostFragment);
+
     }
 
     public void capturarFoto(View view) {

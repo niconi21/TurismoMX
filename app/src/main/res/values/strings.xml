@@ -76,6 +76,8 @@
 
     <string name="mgsErrorComentario">Es necesaria el comentario</string>
 
+    <!--  Search  -->
+    <string name="search_hint">Buscar...</string>
     <!--  API  -->
     <string name="URL_API">https://turismomx-api.herokuapp.com/api/v1</string>
     <!--    <string name="URL_API">http://192.168.1.71:3000/api/v1</string>-->

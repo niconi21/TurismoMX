@@ -102,6 +102,32 @@ public class PublicacionService {
     }
 
     @SuppressLint("NewApi")
+    public void obtenerPublicacionesFiltro(String filtro,RecyclerView recyclerView) {
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/filtro/"+filtro, new JSONObject(),
+                response -> {
+                    try {
+                        Result result = new Result();
+                        ArrayList<Publicacion> publicaciones = result.parseResultPublicaciones(response.getJSONObject("result")).getPublicaciones();
+                        publicaciones.forEach(publicacion -> {
+                            publicacion.setTipo("post");
+                        });
+                        PublicacionAdapter publicacionAdapter = new PublicacionAdapter(publicaciones);
+                        Implementacion.llenarListaRecycleView(this.context, recyclerView, publicacionAdapter, publicaciones);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                ,
+                error -> {
+                    this._showMessage(error);
+                }
+        );
+
+        this._peticiones.agregarCola(peticion);
+    }
+
+    @SuppressLint("NewApi")
     public void obtenerMisPublicaciones(RecyclerView recyclerView) {
         JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/propios", new JSONObject(),
                 response -> {
