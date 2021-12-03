@@ -107,24 +107,32 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cambiar de idioma"
+            android:text="@string/cambiarIdioma"
             android:textSize="@dimen/size_titles"
             android:layout_marginBottom="10dp"/>
         <com.google.android.material.button.MaterialButtonToggleGroup
-            android:id="@+id/toggleButton"
+            android:id="@+id/toggleButtonIdioma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/btnEspanol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Español"
+                android:text="@string/espanol"
+                style="?attr/materialButtonOutlinedStyle"
                 />
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnIngles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ingles"
+                android:text="@string/ingles"
+                style="?attr/materialButtonOutlinedStyle"
+                />
+            <Button
+                android:id="@+id/btnFrances"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/frances"
                 style="?attr/materialButtonOutlinedStyle"
                 />
         </com.google.android.material.button.MaterialButtonToggleGroup>

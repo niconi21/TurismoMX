@@ -58,7 +58,7 @@
     <string name="editarPost">Editar</string>
     <string name="eliminarPost">Eliminar</string>
     <string name="agergarFavoritoPost">Marcar cómo favorito</string>
-    <string name="eliminarFavoritoPost">Descarmar cómo favorito</string>
+    <string name="eliminarFavoritoPost">Desmarcar cómo favorito</string>
 
     <!--  BottomSheetsImagen  -->
     <string name="compartir">Compartir</string>
@@ -81,11 +81,21 @@
     <!--  Search  -->
     <string name="search_hint">Buscar...</string>
     <!--  API  -->
-    <string name="URL_API">https://turismomx-api.herokuapp.com/api/v1</string>
+    <string name="URL_API" translatable="false">https://turismomx-api.herokuapp.com/api/v1</string>
     <!--    <string name="URL_API">http://192.168.1.71:3000/api/v1</string>-->
 
+<!--  IDIOMA  -->
+    <string name="espanol">Español</string>
+    <string name="ingles">Ingles</string>
+    <string name="frances">Frances</string>
+
     <!--  DataBase  -->
-    <string name="DB_NAME">turismoMX</string>
+    <string name="DB_NAME" translatable="false">turismoMX</string>
+    <string name="subidoPor">"Subido por "</string>
+    <string name="fecha">"Fecha: "</string>
+    <string name="lugar">"Lugar: "</string>
+    <string name="comentarios">Comentarios</string>
+    <string name="escribeComntario">Escribe tu comentario</string>
+    <string name="cambiarIdioma">Cambiar de idioma</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

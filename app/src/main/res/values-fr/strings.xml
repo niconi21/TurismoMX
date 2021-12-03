@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">TurismoMX</string>
+
+    <!--    AUTH    -->
+    <string name="logo">Logo</string>
+    <!--    Login    -->
+    <string name="iniciarSesion">Commencer la session</string>
+    <string name="registrarse">Enregistrement</string>
+    <string name="recuperarClave">Récupérer le mot de passe</string>
+    <string name="reestablecerClave">Rétablir</string>
+    <string name="recordarCorreo">Vous vous souvenez de l\'e-mail ?</string>
+    <!--    Regsitro    -->
+    <string name="registro">Enregistrer</string>
+    <string name="tienesCuenta">Avez-vous déjà un compte?</string>
+    <string name="usuario">Utilisateur</string>
+    <string name="clave">Mot de passe</string>
+    <string name="nombre">nom</string>
+    <string name="correo">Courrier électronique</string>
+    <!--    Forgot    -->
+    <string name="reestablecer">Réinitialiser</string>
+
+    <!--    Usuario -->
+
+    <!--    MenuInicio-->
+    <string name="menu_mapa">Carte</string>
+    <string name="menu_misPosts">Mes publications</string>
+    <string name="menu_subirPost">Télécharger le message</string>
+    <string name="menu_posts">Publications</string>
+    <string name="menu_perfil">Profil</string>
+    <string name="menu_buscar">Chercher</string>
+    <string name="menu_favoritos">Favoris</string>
+
+    <!--  Perfil fragment  -->
+    <string name="infoUsuario">Informations de l\'utilisateur</string>
+    <string name="actualizar">Mettre à jour les informations</string>
+    <string name="actualizarContraseña">Mettre à jour le mot de passe</string>
+    <string name="cerrarSesion">Fermer la session</string>
+    <string name="imgPerfil">Image de profil</string>
+    <string name="claveActual">mot de passe actuel</string>
+    <string name="claveNueva">nouveau mot de passe</string>
+
+    <!--   itemPublicación   -->
+    <string name="imagenSave">Image enregistrée dans la galerie</string>
+    <string name="imagenDontSave">L\'image n\'a pas pu être téléchargée</string>
+    <string name="actualizarPublicacion">Mettre à jour le message</string>
+    <string name="msgDescripcionActualizarPost">Nous pouvons uniquement mettre à jour la description de votre publication</string>
+
+    <!--  Datos post activity  -->
+    <string name="titulo">Titre</string>
+    <string name="descripcion">La description</string>
+    <string name="ubicacion">Emplacement</string>
+    <string name="etiquetas">Étiquettes</string>
+    <string name="subirPost">Télécharger la publication</string>
+    <string name="cancelar">Annuler</string>
+    <string name="postEnviado">Message envoyé</string>
+
+    <!--  Post Item  -->
+    <string name="editarPost">Éditer</string>
+    <string name="eliminarPost">Supprimer</string>
+    <string name="agergarFavoritoPost">Marquer comme favori</string>
+    <string name="eliminarFavoritoPost">Télécharger en tant que favori</string>
+
+    <!--  BottomSheetsImagen  -->
+    <string name="compartir">Partager</string>
+    <string name="descargarImagen">Télécharger l\'image</string>
+
+    <!--  Mensajes de error validaciones  -->
+    <string name="mgsErrorCorreo">Le courrier est nécessaire</string>
+    <string name="mgsErrorClave">Mot de passe requis</string>
+    <string name="mgsErrorClaveActual">Le mot de passe actuel est requis</string>
+    <string name="mgsErrorClaveNueva">Le nouveau mot de passe est requis</string>
+    <string name="mgsErrorNombre">Le nom est requis</string>
+    <string name="mgsErrorGeneral">Remplissez toutes les données correspondantes</string>
+
+    <string name="mgsErrorTitulo">Le titre est requis</string>
+    <string name="mgsErrorDescripcion">La description est requise</string>
+    <string name="mgsErrorEtiqueta">L\'étiquette est requise</string>
+
+    <string name="mgsErrorComentario">Un commentaire est requis</string>
+
+    <!--  Search  -->
+    <string name="search_hint">Chercher...</string>
+    <!--  API  -->
+    <!--    <string name="URL_API">http://192.168.1.71:3000/api/v1</string>-->
+
+    <!--  IDIOMA  -->
+    <string name="espanol">Espagnol</string>
+    <string name="ingles">Anglais</string>
+    <string name="frances">français</string>
+
+    <!--  DataBase  -->
+    <string name="subidoPor">"telechargé par "</string>
+    <string name="fecha">"Date: "</string>
+    <string name="comentarios">commentaires</string>
+    <string name="escribeComntario">"Écrivez votre commentaire "</string>
+    <string name="lugar">"Endroit: "</string>
+    <string name="cambiarIdioma">"Changer de langue "</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

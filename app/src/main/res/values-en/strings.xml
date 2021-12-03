@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">TurismoMX</string>
+
+    <!--    AUTH    -->
+    <string name="logo">Logo</string>
+    <!--    Login    -->
+    <string name="iniciarSesion">"Log in "</string>
+    <string name="registrarse">Sing Up</string>
+    <string name="recuperarClave">"Recover password "</string>
+    <string name="reestablecerClave">Reestablish</string>
+    <string name="recordarCorreo">"Remember email? "</string>
+    <!--    Regsitro    -->
+    <string name="registro">Registration</string>
+    <string name="tienesCuenta">"Do you already have an account? "</string>
+    <string name="usuario">"User "</string>
+    <string name="clave">Password</string>
+    <string name="nombre">Name</string>
+    <string name="correo">Email</string>
+    <!--    Forgot    -->
+    <string name="reestablecer">Reestablish</string>
+
+    <!--    Usuario -->
+
+    <!--    MenuInicio-->
+    <string name="menu_mapa">Map</string>
+    <string name="menu_misPosts">Posts</string>
+    <string name="menu_subirPost">"Upload post "</string>
+    <string name="menu_posts">Posts</string>
+    <string name="menu_perfil">Profile</string>
+    <string name="menu_buscar">search</string>
+    <string name="menu_favoritos">Favorites</string>
+
+    <!--  Perfil fragment  -->
+    <string name="infoUsuario">"User information "</string>
+    <string name="actualizar">"Update information "</string>
+    <string name="actualizarContraseña">Update password</string>
+    <string name="cerrarSesion">Log out</string>
+    <string name="imgPerfil">Profile picture</string>
+    <string name="claveActual">Current password</string>
+    <string name="claveNueva">new password</string>
+
+    <!--   itemPublicación   -->
+    <string name="imagenSave">Image saved in gallery</string>
+    <string name="imagenDontSave">Image could not be downloaded</string>
+    <string name="actualizarPublicacion">Update post</string>
+    <string name="msgDescripcionActualizarPost">We can only update the description of your publication</string>
+
+    <!--  Datos post activity  -->
+    <string name="titulo">Title</string>
+    <string name="descripcion">Description</string>
+    <string name="ubicacion">Location</string>
+    <string name="etiquetas">Labels</string>
+    <string name="subirPost">Upload publication</string>
+    <string name="cancelar">Cancel</string>
+    <string name="postEnviado">Post sent</string>
+
+    <!--  Post Item  -->
+    <string name="editarPost">Edit</string>
+    <string name="eliminarPost">Remove</string>
+    <string name="agergarFavoritoPost">Mark as favorite</string>
+    <string name="eliminarFavoritoPost">Unmark as favorite</string>
+
+    <!--  BottomSheetsImagen  -->
+    <string name="compartir">Share</string>
+    <string name="descargarImagen">Download image</string>
+
+    <!--  Mensajes de error validaciones  -->
+    <string name="mgsErrorCorreo">"Mail is necessary "</string>
+    <string name="mgsErrorClave">Password is required</string>
+    <string name="mgsErrorClaveActual">The current password is required</string>
+    <string name="mgsErrorClaveNueva">The new password is required</string>
+    <string name="mgsErrorNombre">Name is required</string>
+    <string name="mgsErrorGeneral">Fill in all the corresponding data</string>
+
+    <string name="mgsErrorTitulo">Title is required</string>
+    <string name="mgsErrorDescripcion">Description is required</string>
+    <string name="mgsErrorEtiqueta">Label is required</string>
+
+    <string name="mgsErrorComentario">Comment is required</string>
+
+    <!--  Search  -->
+    <string name="search_hint">search...</string>
+    <!--  API  -->
+    <!--    <string name="URL_API">http://192.168.1.71:3000/api/v1</string>-->
+
+    <!--  IDIOMA  -->
+    <string name="espanol">"Spanish "</string>
+    <string name="ingles">English</string>
+    <string name="frances">French</string>
+
+    <!--  DataBase  -->
+    <string name="subidoPor">"Uploaded by "</string>
+    <string name="fecha">"Date: "</string>
+    <string name="lugar">"Place: "</string>
+    <string name="comentarios">Comments</string>
+    <string name="escribeComntario">"Write your comment "</string>
+    <string name="cambiarIdioma">Change language</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>
