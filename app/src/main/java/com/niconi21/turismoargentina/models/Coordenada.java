@@ -6,6 +6,7 @@ import org.json.JSONObject;
 public class Coordenada {
     private double latitud;
     private double longitud;
+    private String lugar;
 
     public Coordenada() {
         this(0, 0);
@@ -21,6 +22,7 @@ public class Coordenada {
         try {
             coordenada.setLatitud(coordenadaJson.getDouble("latitud"));
             coordenada.setLongitud(coordenadaJson.getDouble("altitud"));
+            coordenada.setLugar(coordenadaJson.getString("lugar"));
         } catch (JSONException e) {
             e.printStackTrace();
         } finally {
@@ -42,6 +44,14 @@ public class Coordenada {
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 
     @Override

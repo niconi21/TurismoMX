@@ -7,6 +7,7 @@ public class Comentario {
     private String comentario;
     private Usuario usuario;
     private Date fecha;
+    private Boolean isAutor;
 
     public String getComentario() {
         return comentario;
@@ -30,5 +31,23 @@ public class Comentario {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Boolean getAutor() {
+        return isAutor;
+    }
+
+    public void setAutor(Boolean autor) {
+        isAutor = autor;
+    }
+
+    @Override
+    public String toString() {
+        return "Comentario{" +
+                "comentario='" + comentario + '\'' +
+                ", usuario=" + usuario +
+                ", fecha=" + fecha +
+                ", isAutor=" + isAutor +
+                '}';
     }
 }

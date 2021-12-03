@@ -163,6 +163,7 @@
                     android:layout_height="50dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:onClick="subirComentario"
                     android:background="@android:color/transparent"
                     android:contentDescription="descripcion"
                     android:src="@drawable/ic_baseline_send_24">

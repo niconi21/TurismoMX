@@ -13,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.niconi21.turismoargentina.R;
 import com.niconi21.turismoargentina.db.SingletonDB;
 import com.niconi21.turismoargentina.tools.Mensajes;
+
 
 public class PerfilFragment extends Fragment {
     private Button _btnCambiarClave;
@@ -45,20 +48,28 @@ public class PerfilFragment extends Fragment {
 
     public void actualizarClave() {
         this._btnCambiarClave.setOnClickListener(v -> {
-            Mensajes.Dialogs(getContext(), "Cambiar contraseña", "Escribe tu contraseña actual y posteriormente la nueva contraseña")
+            View content = LayoutInflater.from(getContext()).inflate(R.layout.dialog_cambiar_clave, null);
+            MaterialAlertDialogBuilder dialogBuilder = Mensajes.Dialogs(getContext(), "Cambiar contraseña", "Escribe tu contraseña actual y posteriormente la nueva contraseña")
                     .setNegativeButton(R.string.cancelar, (dialog, which) -> {
                         Mensajes.MensajeSnackBar(v, "Contraseña no actualizada", Snackbar
                                 .LENGTH_LONG);
                     })
                     .setPositiveButton(R.string.actualizarContraseña, (dialog, which) -> {
-                        this._actualizarClave();
-                    })
-                    .create()
-                    .show();
+                        this._actualizarClave(content);
+                    });
+            dialogBuilder.setView(content);
+            dialogBuilder.create();
+            dialogBuilder.setView(content);
+            dialogBuilder.show();
+
+
         });
     }
 
-    private void _actualizarClave() {
+
+    private void _actualizarClave(View view) {
+        TextInputLayout claveActual = view.findViewById(R.id.tfClaveActualPerfil);
+        System.out.println(claveActual.getEditText().getText().toString());
         Mensajes.MensajeSnackBar(this.getView(), "Contraseña actualizada", Snackbar.LENGTH_LONG);
     }
 

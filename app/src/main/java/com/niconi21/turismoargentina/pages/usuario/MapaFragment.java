@@ -27,7 +27,7 @@ import com.niconi21.turismoargentina.services.MapaService;
 import com.niconi21.turismoargentina.tools.Permisos;
 
 public class MapaFragment extends Fragment {
-
+    public MapaService mapaService;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         private FusedLocationProviderClient _fusedLocationClient;
 
@@ -51,7 +51,7 @@ public class MapaFragment extends Fragment {
                     marca.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     googleMap.addMarker(marca);
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(actual));
-                    MapaService mapaService = new MapaService(getContext(), getView());
+
                     mapaService.obtenerPublicaciones(googleMap);
                 });
             }
@@ -71,6 +71,7 @@ public class MapaFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+         this.mapaService = new MapaService(getContext(), view);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {

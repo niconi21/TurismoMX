@@ -85,17 +85,19 @@
                         android:id="@+id/eliminarPostItem"
                         android:layout_width="25dp"
                         android:layout_height="25dp"
+                        android:layout_marginLeft="15dp"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/eliminarPost"
                         android:src="@drawable/ic_baseline_delete_forever_24" />
 
                     <ImageButton
-                        android:id="@+id/favoritoPostItem"
-                        android:layout_width="25dp"
+                        android:id="@+id/agregarFavoritoPostItem"
+                        android:layout_width="wrap_content"
                         android:layout_height="25dp"
                         android:background="@android:color/transparent"
-                        android:contentDescription="@string/favoritoPost"
+                        android:contentDescription="@string/agergarFavoritoPost"
                         android:src="@drawable/ic_baseline_favorite_24" />
+
                 </LinearLayout>
 
             </LinearLayout>

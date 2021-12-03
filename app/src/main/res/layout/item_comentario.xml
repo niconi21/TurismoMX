@@ -11,16 +11,19 @@
         android:layout_marginBottom="5dp">
 
         <TextView
+            android:id="@+id/usuarioItemComentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nicolas Moreno Durán"
             android:textSize="@dimen/size_data" />
 
         <TextView
+            android:id="@+id/autorItemComentario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" - Autor"
+            android:text="Autor"
             android:textSize="@dimen/size_data" />
+
     </LinearLayout>
 
     <TextView

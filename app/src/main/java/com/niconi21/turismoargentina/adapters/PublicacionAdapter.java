@@ -3,33 +3,29 @@ package com.niconi21.turismoargentina.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.niconi21.turismoargentina.PostDetalleActivity;
 import com.niconi21.turismoargentina.R;
-import com.niconi21.turismoargentina.UsuarioActivity;
 import com.niconi21.turismoargentina.models.Publicacion;
+import com.niconi21.turismoargentina.services.PublicacionService;
+import com.niconi21.turismoargentina.tools.Mensajes;
+import com.niconi21.turismoargentina.tools.Validaciones;
 
 import java.util.ArrayList;
 
@@ -73,10 +69,12 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
         public ImageButton favorito;
         public CardView card;
         public Context context;
+        private PublicacionService _publicacionService;
         private Publicacion _publicacion;
 
         public ViewHoldersPublicacion(@NonNull View itemView) {
             super(itemView);
+            this._publicacionService = new PublicacionService(this.itemView.getContext(), this.itemView);
             this.context = itemView.getContext();
             this.titulo = itemView.findViewById(R.id.tituloPost);
             this.fecha = itemView.findViewById(R.id.fechaPost);
@@ -86,19 +84,25 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
             this.card = itemView.findViewById(R.id.cardItemPost);
             this.editar = itemView.findViewById(R.id.editarPostItem);
             this.eliminar = itemView.findViewById(R.id.eliminarPostItem);
-            this.favorito = itemView.findViewById(R.id.favoritoPostItem);
+            this.favorito = itemView.findViewById(R.id.agregarFavoritoPostItem);
 
         }
 
         private void _ocultarIconos() {
             switch (this._publicacion.getTipo()) {
                 case "post":
+                    this.editar.setVisibility(View.GONE);
+                    this.eliminar.setVisibility(View.GONE);
+                    break;
                 case "favorito":
-                        this.editar.setVisibility(View.GONE);
-                        this.eliminar.setVisibility(View.GONE);
+                    this.editar.setVisibility(View.GONE);
+                    this.eliminar.setVisibility(View.GONE);
+                    this.favorito.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    this.favorito.setContentDescription("Eliminar de favoritos");
                     break;
                 case "misPost":
                     this.favorito.setVisibility(View.GONE);
+
                     break;
             }
 
@@ -113,6 +117,9 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
             this.usuario.setText(publicacion.getUsuario().getNombre());
             Glide.with(itemView.getContext()).load(this._publicacion.getImagen()).into(this.imagen);
             this.descargarImagen();
+            this.agregarFavorito();
+            this.eliminarPublicacion();
+            this.editarPublicacion();
         }
 
         public void descargarImagen() {
@@ -130,6 +137,50 @@ public class PublicacionAdapter extends RecyclerView.Adapter<PublicacionAdapter.
         public void onClickListener() {
             this.card.setOnClickListener(this);
         }
+
+        public void agregarFavorito() {
+            this.favorito.setOnClickListener(v -> {
+                if (!this._publicacion.getTipo().equalsIgnoreCase("favorito")) {
+                    this._publicacionService.agregarFavorito(this._publicacion.getId());
+
+                } else {
+                    this._publicacionService.eliminarFavorito(this._publicacion.getId());
+                }
+            });
+        }
+
+        public void eliminarPublicacion() {
+            this.eliminar.setOnClickListener(v -> {
+                this._publicacionService.eliminarPublicacion(this._publicacion.getId());
+            });
+        }
+
+        public void editarPublicacion() {
+            this.editar.setOnClickListener(v -> {
+                View content = LayoutInflater.from(context).inflate(R.layout.dialog_actualizar_post, null);
+
+                TextInputLayout descripcion = content.findViewById(R.id.tfdescripcionPostDialog);
+                descripcion.getEditText().setText(this._publicacion.getDescripcion());
+                Validaciones.textChangedListener(descripcion, context.getString(R.string.mgsErrorDescripcion));
+
+                MaterialAlertDialogBuilder dialogBuilder = Mensajes.Dialogs(this.context, context.getString(R.string.actualizarPublicacion), context.getString(R.string.msgDescripcionActualizarPost));
+
+                dialogBuilder.setView(content);
+                dialogBuilder.setPositiveButton(context.getString(R.string.actualizarPublicacion), (dialog, which) -> {
+                    Boolean isValidDescripcion = Validaciones.isValid(descripcion, context.getString(R.string.mgsErrorDescripcion));
+                    if(isValidDescripcion){
+                        String descripcionString = descripcion.getEditText().getText().toString();
+                        this._publicacionService.actualizarPublicacion(this._publicacion.getId(), descripcionString);
+                    }else{
+                        Mensajes.MensajeSnackBar(itemView.getRootView(), context.getString(R.string.mgsErrorGeneral), Snackbar.LENGTH_SHORT);
+                    }
+                });
+                dialogBuilder.create();
+                dialogBuilder.show();
+            });
+        }
+
+
 
         @Override
         public void onClick(View v) {

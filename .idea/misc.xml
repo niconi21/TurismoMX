@@ -18,8 +18,11 @@
         <entry key="app/src/main/res/layout/activity_usuario.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bottom_sheets_imagen.xml" value="0.22" />
         <entry key="app/src/main/res/layout/content_post_detalle.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_actualizar_post.xml" value="0.12222222222222222" />
+        <entry key="app/src/main/res/layout/dialog_cambiar_clave.xml" value="0.45790554414784396" />
         <entry key="app/src/main/res/layout/fragment_comentarios.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_datos_post.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_dialog_cambiar_clave.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_favoritos.xml" value="0.12" />
         <entry key="app/src/main/res/layout/fragment_forgot.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_inicio.xml" value="0.18" />
@@ -33,7 +36,7 @@
         <entry key="app/src/main/res/layout/fragment_subir_post.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_comentario.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_favoritos.xml" value="0.1222972972972973" />
-        <entry key="app/src/main/res/layout/item_publicacion.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/item_publicacion.xml" value="0.5" />
         <entry key="app/src/main/res/menu/menu_busqueda.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_inicio.xml" value="0.18" />
         <entry key="app/src/main/res/menu/menu_inicio_bottom.xml" value="0.1" />

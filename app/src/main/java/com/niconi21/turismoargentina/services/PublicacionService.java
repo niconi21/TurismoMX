@@ -3,10 +3,12 @@ package com.niconi21.turismoargentina.services;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Icon;
 import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -151,7 +153,6 @@ public class PublicacionService {
         this._peticiones.agregarCola(peticion);
     }
 
-
     @SuppressLint("NewApi")
     public void agregarPublicacion(Publicacion publicacion, DatosPostActivity activity, Bitmap img) {
         try {
@@ -193,6 +194,52 @@ public class PublicacionService {
         }
     }
 
+    @SuppressLint("NewApi")
+    public void agregarFavorito(String _id) {
+        JSONObject body = new JSONObject();
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.POST, context.getString(R.string.URL_API) + this.ENDPOINT + "/agregar/favorito/" + _id, body,
+                response -> this._showMessage(response),
+                error -> this._showMessage(error)
+        );
+
+        this._peticiones.agregarCola(peticion);
+
+    }
+
+    @SuppressLint("NewApi")
+    public void eliminarFavorito(String _id) {
+        JSONObject body = new JSONObject();
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.DELETE, context.getString(R.string.URL_API) + this.ENDPOINT + "/eliminar/favorito/" + _id, body,
+                response -> this._showMessage(response),
+                error -> this._showMessage(error)
+        );
+        this._peticiones.agregarCola(peticion);
+    }
+
+    @SuppressLint("NewApi")
+    public void eliminarPublicacion(String _id) {
+        JSONObject body = new JSONObject();
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.DELETE, context.getString(R.string.URL_API) + this.ENDPOINT + "/eliminar/post/" + _id, body,
+                response -> this._showMessage(response),
+                error -> this._showMessage(error)
+        );
+        this._peticiones.agregarCola(peticion);
+    }
+
+    @SuppressLint("NewApi")
+    public void actualizarPublicacion(String _id, String descripcion) {
+        try {
+            JSONObject body = new JSONObject();
+            body.put("descripcion", descripcion);
+            JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.PUT, context.getString(R.string.URL_API) + this.ENDPOINT + "/editar/post/" + _id, body,
+                    response -> this._showMessage(response),
+                    error -> this._showMessage(error)
+            );
+            this._peticiones.agregarCola(peticion);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void _subirImagen(String _id, Bitmap imagen) {
         this._crearArchivo(imagen);
@@ -206,7 +253,7 @@ public class PublicacionService {
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
         int maxBufferSize = 1 * 1024 * 1024;
-        String urlString = "https://turismomx-api.herokuapp.com/api/v1/archivo/subir/imagen/post/"+_id;
+        String urlString = "https://turismomx-api.herokuapp.com/api/v1/archivo/subir/imagen/post/" + _id;
 
         try {
             System.out.println("abriendo archivo");
@@ -285,7 +332,7 @@ public class PublicacionService {
         }
     }
 
-    private void _crearArchivo(Bitmap imagen){
+    private void _crearArchivo(Bitmap imagen) {
         System.out.println("Creando archivo");
         File filesDir = this.context.getFilesDir();
         File imageFile = new File(filesDir, "imagen.jpg");

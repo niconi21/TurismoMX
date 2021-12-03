@@ -84,10 +84,12 @@ public class Usuario {
         this.favoritos = favoritos;
     }
 
-    @NonNull
     @Override
     public String toString() {
-        return "Nombre: " + getNombre() +
-                "correo: " + getCorreo();
+        return "Usuario{" +
+                "nombre='" + nombre + '\'' +
+                ", id='" + id + '\'' +
+                ", clave='" + clave + '\'' +
+                '}';
     }
 }

@@ -8,7 +8,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.dialog.MaterialDialogs;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import com.niconi21.turismoargentina.R;
 
 public class Mensajes {
 
@@ -30,6 +33,7 @@ public class Mensajes {
 
     public static MaterialAlertDialogBuilder Dialogs(Context context, String title, String mensaje) {
         MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(context);
+
         dialogBuilder.setTitle(title);
         dialogBuilder.setMessage(mensaje);
         return dialogBuilder;

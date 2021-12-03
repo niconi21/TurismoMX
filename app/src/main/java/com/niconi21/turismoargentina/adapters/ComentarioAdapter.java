@@ -42,14 +42,20 @@ public class ComentarioAdapter extends RecyclerView.Adapter<ComentarioAdapter.Vi
     public class ViewHolderComentario extends RecyclerView.ViewHolder {
 
         public TextView comentario;
+        public TextView usuario;
+        public TextView autor;
+
         public ViewHolderComentario(@NonNull View itemView) {
             super(itemView);
-            this.comentario = (TextView)itemView.findViewById(R.id.comentarioItemC);
-
+            this.comentario = itemView.findViewById(R.id.comentarioItemC);
+            this.autor = itemView.findViewById(R.id.autorItemComentario);
+            this.usuario = itemView.findViewById(R.id.usuarioItemComentario);
         }
 
         public void asignarDatos(Comentario comentario) {
             this.comentario.setText(comentario.getComentario());
+            this.usuario.setText(comentario.getUsuario().getNombre());
+            this.autor.setText(comentario.getAutor() ? " - Autor" : "");
         }
     }
 }
