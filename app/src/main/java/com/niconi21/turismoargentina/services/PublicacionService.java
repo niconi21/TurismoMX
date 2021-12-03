@@ -3,12 +3,9 @@ package com.niconi21.turismoargentina.services;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Icon;
 import android.os.Environment;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -56,7 +52,7 @@ public class PublicacionService {
     }
 
     public void obtenerPublicacion(PostDetalleActivity activity, String id) {
-        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/post/" + id, new JSONObject(),
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/post" + id, new JSONObject(),
                 response -> {
                     try {
                         System.out.println(response.toString());
@@ -77,7 +73,7 @@ public class PublicacionService {
 
     @SuppressLint("NewApi")
     public void obtenerPublicaciones(RecyclerView recyclerView) {
-        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/todas", new JSONObject(),
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/todas?limit=10000&skip=0", new JSONObject(),
                 response -> {
                     try {
                         Result result = new Result();
@@ -103,7 +99,7 @@ public class PublicacionService {
 
     @SuppressLint("NewApi")
     public void obtenerPublicacionesFiltro(String filtro,RecyclerView recyclerView) {
-        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/filtro/"+filtro, new JSONObject(),
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/filtro/"+filtro+"?limit=10000&skip=0", new JSONObject(),
                 response -> {
                     try {
                         Result result = new Result();
@@ -129,7 +125,7 @@ public class PublicacionService {
 
     @SuppressLint("NewApi")
     public void obtenerMisPublicaciones(RecyclerView recyclerView) {
-        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/propios", new JSONObject(),
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/propios?limit=10000&skip=0", new JSONObject(),
                 response -> {
                     try {
                         Result result = new Result();
@@ -155,7 +151,7 @@ public class PublicacionService {
 
     @SuppressLint("NewApi")
     public void obtenerFavoritos(RecyclerView recyclerView) {
-        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/favoritos", new JSONObject(),
+        JsonObjectRequest peticion = this._peticiones.getJsonWithHeader(Request.Method.GET, context.getString(R.string.URL_API) + this.ENDPOINT + "/obtener/favoritos?limit=10000&skip=0", new JSONObject(),
                 response -> {
                     try {
                         Result result = new Result();
